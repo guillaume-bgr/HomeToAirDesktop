@@ -1,0 +1,78 @@
+:root {
+    --home2air-light: #F0F0F7;
+    --home2air-dark: #24242A;
+    --home2air-dark-hover: #42424d;
+    --home2air-grey: #A1A5B7;
+    --bs-breadcrumb-divider: "-"
+}
+
+body {
+    background-color: var(--home2air-light) !important;
+}
+
+main {
+    margin-left: 200px;
+}
+
+h1, .h1 {
+    font-size: 1.2em !important;
+}
+
+.nav-link .menu-icon {
+    width: 40px;
+}
+
+/* Fin sidebar */
+
+.bg-dark {
+    background-color: var(--home2air-dark);
+}
+
+.bg-light {
+    background-color: var(--home2air-light);
+}
+
+.separator {
+    border-top: 1px solid var(--home2air-grey);
+}
+
+/* Sidebar */
+
+#sidebar {
+    min-width: 200px;
+    width: 200px;
+    padding: 8px;
+    background-color: var(--home2air-dark);
+    height: 100vh;
+    position: fixed;
+}
+
+#sidebar nav {
+    padding: 16px 8px;
+}
+
+#sidebar nav .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    color: var(--home2air-light);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#sidebar nav .nav-link:hover {
+    background-color: var(--home2air-dark-hover);
+}
+
+#appTopbar .content {
+    border-radius: 8px;
+}
+
+.breadcrumb .breadcrumb-item {
+    color: var(--home2air-grey);
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    color: var(--home2air-grey) !important;
+}
+
