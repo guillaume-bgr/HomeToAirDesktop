@@ -3,18 +3,72 @@
     --home2air-dark: #24242A;
     --home2air-dark-hover: #42424d;
     --home2air-grey: #A1A5B7;
-    --bs-breadcrumb-divider: "-"
+    --home2air-muted: #767a87;
+    --home2air-body: #f5f8fa;
+    --bs-breadcrumb-divider: "-";
+    --home2air-line-grey: #ced2e6;
+    --home2air-primary: #0085FF;
+    --home2air-success: #27af33;
+    --home2air-warning: #ebdb4b;
+    --home2air-danger: #c22020;
+    --bs-link-color-rgb: #0085FF;
+    --home2air-white: #ffffff;
+    --home2air-black: #000000;
 }
 
 body {
-    background-color: var(--home2air-light) !important;
+    background-color: var(--home2air-body) !important;
 }
 
 main {
     margin-left: 200px;
 }
 
-h1, .h1 {
+h1 {
+    font-size: 1.6em !important;
+}
+
+h2 {
+    font-size: 1.4em !important;
+}
+
+h3 {
+    font-size: 1.2em !important;
+}
+
+h4 {
+    font-size: 1.1em !important;
+}
+
+h5 {
+    font-size: 1em !important;
+}
+
+/* Scrollbar */
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+background: #555;
+}
+
+/* Fin scrollbar */
+
+h1.page-title {
     font-size: 1.2em !important;
 }
 
@@ -23,7 +77,6 @@ h1, .h1 {
 }
 
 /* Fin sidebar */
-
 .bg-dark {
     background-color: var(--home2air-dark);
 }
@@ -34,6 +87,23 @@ h1, .h1 {
 
 .separator {
     border-top: 1px solid var(--home2air-grey);
+}
+
+.btn-primary {
+    background-color: var(--home2air-primary);
+    font-weight: 500;
+}
+
+.btn-secondary {
+    font-weight: 500;   
+    background-color: var(--home2air-white);
+    border: 0;
+    color: var(--home2air-black);
+}
+
+.btn-secondary:hover {
+    background-color: var(--home2air-white);
+    color: var(--home2air-primary);
 }
 
 /* Sidebar */
@@ -64,15 +134,200 @@ h1, .h1 {
     background-color: var(--home2air-dark-hover);
 }
 
+/* Fin sidebar */
+
+/* Topbar */
+
+#appTopbar {
+    margin-bottom: 1em;
+}
+
 #appTopbar .content {
     border-radius: 8px;
 }
 
 .breadcrumb .breadcrumb-item {
+    font-size: 0.8em;
     color: var(--home2air-grey);
 }
 
 .breadcrumb-item+.breadcrumb-item::before {
     color: var(--home2air-grey) !important;
 }
+
+/* Fin topbar */
+
+/* Cards */
+
+.card.no-border {
+    border: 0;
+}
+
+.card .card-header {
+    padding: 0;
+    border-bottom: 0;
+    background-color: transparent;
+    margin-bottom: 8px;
+}
+
+.card .title {
+    margin-bottom: 0;
+}
+
+.card .subtitle {
+    color: var(--home2air-grey);
+}
+
+/* Fin cards */
+
+/* Table */
+
+.table th, .table td {
+    border: none;
+}
+
+tr {
+    border-style: dashed;
+}
+
+.table tbody tr {
+    border-top: 1px dashed var(--home2air-line-grey);
+    border-style: dashed;
+    vertical-align: middle;
+}
+
+.table tbody tr a {
+    text-decoration: none;
+}
+
+.table tbody tr a:hover {
+    color: var(--home2air-primary);
+}
+
+.btn-icon {
+    background-color: var(--home2air-body);
+    width: 38px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--home2air-grey);
+}
+
+.btn-icon:hover {
+    background-color: var(--home2air-body);
+}
+
+/* fin Table */
+
+/* Widget jauge */
+
+.gauge {
+    width: 100%;
+    height: 5px;
+    border-radius: 5px;
+    background-color: var(--home2air-grey);
+}
+
+.gauge .percentage {
+    height: 100%;
+    border-radius: 5px;
+}
+
+.gauge .percentage.good {
+    background-color: var(--home2air-success);
+}
+.gauge .percentage.average {
+    background-color: var(--home2air-warning);
+}
+.gauge .percentage.low {
+    background-color: var(--home2air-danger);
+}
+
+/* Fin widget jauge */
+
+/* Champs formulaires */
+
+.form-input-solid {
+    background-color: var(--home2air-light);
+    border: none;
+    width: 100%;
+    padding: 8px;
+}
+
+.form-input-solid::placeholder {
+    color: var(--home2air-muted);
+}
+
+.form-control-solid:focus {
+    background-color: var(--home2air-light);
+    border: 0;
+    outline: none;
+}
+
+/* Champ select custom */
+
+.custom-select-solid {
+    position: relative;
+    list-style: none;
+    padding-left: 0;
+    background-color: var(--home2air-light);
+    cursor: pointer;
+    color: var(--home2air-muted);
+}
+
+.custom-select-solid .placeholder-container {
+    padding: 8px;
+}
+
+.custom-select-solid ul {
+    width: 100%;
+    position: absolute;
+    list-style: none;
+    padding-left: 0;
+    background-color: var(--home2air-light);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.2s ease-in-out;
+}
+
+.custom-select-solid ul.open {
+    transition: max-height 0.2s ease-in-out;
+    max-height: 480px;
+    overflow-y: scroll;
+}
+
+.custom-select-solid ul li {
+    padding: 8px;
+}
+
+.custom-select-solid ul li:hover {
+    background-color: var(--home2air-white);
+}
+
+/* .custom-select-solid li {
+    padding: 8px;
+    background-color: var(--home2air-white);
+}
+
+.custom-select-solid li:nth-child(1) {
+    background-color: var(--home2air-light);
+}
+
+.custom-select-solid li:not(:nth-child(1)) {
+    position: absolute;
+    z-index: 999
+}
+
+.custom-select-solid li:not(:nth-child(1)):hover {
+    background-color: var(--home2air-light);
+} */
+
+/* Fin champ custom */
+
+/* Fin champ formulaires */
+
+
+
+
 

@@ -1,13 +1,14 @@
 import Versions from './components/Versions'
 import icons from './assets/icons.svg'
-import Home from './pages/Home.jsx'
-import Sidebar from './components/layout/Sidebar'
+import Home from './pages/Home'
+import Sensors from './pages/Sensors'
 import Template from './pages/Template'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import AddSensor from './components/forms/add/AddSensor'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Template />,
     children: [
       {
@@ -16,16 +17,23 @@ const router = createBrowserRouter([
       },
       {
         path: '/sensors',
-        element: <Sensors />
+        children: [
+          {
+            index: true,
+            element: <Sensors />
+          },
+          {
+            path: '/sensors/add',
+            element: <AddSensor />
+          },
+        ]
       }
     ]
-  },
+  }
 ])
 
 function App() {
-  return (
-    <RouterProvider router={router}/>
-  )
+  return <RouterProvider router={router} />
 }
 
 export default App
