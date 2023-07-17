@@ -14,8 +14,7 @@ function Sensors() {
 						{title: 'Mes capteurs'}
 					]}
 					buttons={[{title: 'Ajouter un capteur', path:'/sensors/add'}, {title: 'Retour au menu', path:'/', className: 'btn-secondary'}]}
-					/>
-
+				/>
         </div>
         <div className="col-12">
           <Card title="Mes capteurs" subtitle="1 résultat">

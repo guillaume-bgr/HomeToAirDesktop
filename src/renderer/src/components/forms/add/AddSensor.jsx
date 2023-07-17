@@ -12,6 +12,7 @@ function AddSensor() {
                 {title: 'Capteurs', path: '/sensors'},
                 {title: 'Ajouter un capteur'}
             ]}
+            buttons={[{title: 'Retour à la liste', path:'/sensors', className: 'btn-secondary'}]}
             />
             <div className="row">
                 <div className="col-12">

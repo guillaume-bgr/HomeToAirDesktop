@@ -1,4 +1,5 @@
 :root {
+    --home2air-form-bg: #f4f4f4;
     --home2air-light: #F0F0F7;
     --home2air-dark: #24242A;
     --home2air-dark-hover: #42424d;
@@ -42,6 +43,10 @@ h4 {
 
 h5 {
     font-size: 1em !important;
+}
+
+.text-white {
+    color: var(--home2air-white);
 }
 
 /* Scrollbar */
@@ -133,6 +138,32 @@ h1.page-title {
 #sidebar nav .nav-link:hover {
     background-color: var(--home2air-dark-hover);
 }
+
+/* Bloc compte */
+
+.account {
+    padding: 8px;
+}
+
+.profile-picture {
+    width: 64px;
+    height: 64px;
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 0.5em auto;
+}
+
+.disconnect {
+    color: var(--home2air-danger);
+    font-size: 0.8em;
+}
+
+.disconnect:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Fin bloc compte */
 
 /* Fin sidebar */
 
@@ -249,7 +280,7 @@ tr {
 /* Champs formulaires */
 
 .form-input-solid {
-    background-color: var(--home2air-light);
+    background-color: var(--home2air-form-bg);
     border: none;
     width: 100%;
     padding: 8px;
@@ -271,7 +302,7 @@ tr {
     position: relative;
     list-style: none;
     padding-left: 0;
-    background-color: var(--home2air-light);
+    background-color: var(--home2air-form-bg);
     cursor: pointer;
     color: var(--home2air-muted);
 }
@@ -304,24 +335,6 @@ tr {
 .custom-select-solid ul li:hover {
     background-color: var(--home2air-white);
 }
-
-/* .custom-select-solid li {
-    padding: 8px;
-    background-color: var(--home2air-white);
-}
-
-.custom-select-solid li:nth-child(1) {
-    background-color: var(--home2air-light);
-}
-
-.custom-select-solid li:not(:nth-child(1)) {
-    position: absolute;
-    z-index: 999
-}
-
-.custom-select-solid li:not(:nth-child(1)):hover {
-    background-color: var(--home2air-light);
-} */
 
 /* Fin champ custom */
 
