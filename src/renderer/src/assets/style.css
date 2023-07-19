@@ -268,6 +268,10 @@ h1.page-title {
     color: var(--home2air-grey);
 }
 
+.card-helper span {
+    vertical-align: middle;
+}
+
 .card.sensor .card-header {
     margin-bottom: 0;
 }
@@ -485,7 +489,43 @@ tr {
     width: 75px;
 }
 
-.sensor-card {
+/* Fin custom carousel */
 
+/* HelpWidget */
+
+.help-widget {
+    position: relative;
 }
+
+.help-widget-button {
+    cursor: pointer;
+}
+
+.help-widget-button:hover + .help-widget-popup, .help-widget-button:focus + .help-widget-popup {
+    opacity: 1;
+}
+
+.help-widget-popup {
+    transition: opacity 0.1s ease-in-out;
+    position: absolute;
+    z-index: 1000;
+    background-color: var(--home2air-white);
+    padding: 8px;
+    min-width: 300px;
+    opacity: 0;
+    left: 0;
+    top: 30px;
+    font-size: 0.9em;
+}
+
+.help-widget-popup.right {
+    left: 0;
+}
+
+.help-widget-popup.left {
+    right: 0;
+    left: unset;
+}
+
+/* Fin HelpWidget */
 
