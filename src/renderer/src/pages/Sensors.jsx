@@ -3,23 +3,12 @@ import Card from '../components/widgets/Card'
 import Gauge from '../components/widgets/Gauge'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { ValidationAlert, SimpleAlert } from '../utils/PopupUtils'
 
 function Sensors() {
-  const MySwal = withReactContent(Swal)
 
   const deleteItem = () => {
-    Swal.fire({
-      title: 'Êtes-vous sûr de vouloir supprimer cet élément ?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Confirmer'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        
-      }
-    })
+    ValidationAlert('Êtes-vous sûr de vouloir supprimer cet élément ?')
   } 
 
   return (
