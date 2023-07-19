@@ -1,9 +1,8 @@
 import TopBar from '../../components/layout/Topbar'
 import Card from '../../components/widgets/Card'
 import Gauge from '../../components/widgets/Gauge'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
 import { ValidationAlert, SimpleAlert } from '../../utils/PopupUtils'
+import { Link } from 'react-router-dom'
 
 function Sensors() {
 
@@ -73,8 +72,8 @@ function Sensors() {
                     </td>
                     <td>
                       <div className="d-flex justify-content-end flex-shrink-0">
-                        <a
-                          href="#"
+                        <Link
+                          to="/sensors/1"
                           className="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
                         >
                           <span className="svg-icon svg-icon-3">
@@ -96,7 +95,7 @@ function Sensors() {
                               ></path>
                             </svg>
                           </span>
-                        </a>
+                        </ Link>
                         <a
                           href="#"
                           className="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
