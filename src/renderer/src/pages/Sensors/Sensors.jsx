@@ -1,9 +1,9 @@
-import TopBar from '../components/layout/Topbar'
-import Card from '../components/widgets/Card'
-import Gauge from '../components/widgets/Gauge'
+import TopBar from '../../components/layout/Topbar'
+import Card from '../../components/widgets/Card'
+import Gauge from '../../components/widgets/Gauge'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import { ValidationAlert, SimpleAlert } from '../utils/PopupUtils'
+import { ValidationAlert, SimpleAlert } from '../../utils/PopupUtils'
 
 function Sensors() {
 

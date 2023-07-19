@@ -1,7 +1,5 @@
-import Versions from './components/Versions'
-import icons from './assets/icons.svg'
 import Home from './pages/Home'
-import Sensors from './pages/Sensors'
+import Sensors from './pages/Sensors/Sensors'
 import Template from './pages/Template'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import AddSensor from './components/forms/add/AddSensor'
