@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 function TopBar(props) {
     // Pour la toolbar : 
@@ -15,7 +16,7 @@ function TopBar(props) {
                                 return (
                                     <li className="breadcrumb-item" key={key}>
                                         {breadcrumb.path ?
-                                        <a className="text-decoration-none" href={breadcrumb.path}>{breadcrumb.title}</a>
+                                        <Link className="text-decoration-none" to={breadcrumb.path}>{breadcrumb.title}</Link>
                                         :
                                         breadcrumb.title}
                                     </li>
@@ -26,7 +27,7 @@ function TopBar(props) {
                     <div className="toolbar">
                         {props.buttons ? props.buttons.map((button, key) => {
                             if (button.path) {
-                                return <a key={key} className={button.className ? 'ms-2 btn '+button.className : 'ms-2 btn btn-primary'} href={button.path}>{button.title}</a>
+                                return <Link key={key} className={button.className ? 'ms-2 btn '+button.className : 'ms-2 btn btn-primary'} to={button.path}>{button.title}</ Link>
                             } else if (button.onPress) {
                                 return <button key={key} className={button.className ? 'ms-2 btn '+button.className : 'ms-2 btn btn-primary'} onPress={button.onPress}>{button.title}</button>
                             }
