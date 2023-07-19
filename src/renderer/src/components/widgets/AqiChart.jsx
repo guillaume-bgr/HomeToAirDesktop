@@ -18,7 +18,6 @@ function Aqi(props) {
         } else {
             colorClass = '#7e0023'
         }
-        console.log(colorClass);
         return colorClass;
     }
 

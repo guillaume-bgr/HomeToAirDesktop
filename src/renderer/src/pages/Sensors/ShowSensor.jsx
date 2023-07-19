@@ -74,8 +74,29 @@ function ShowSensor() {
                         </div>
                     </Card>
                 </div>
-                <div>
-                    <SensorDataChart />
+                <div className='col-12 mt-3'>
+                    <Card title="Données des 12 dernières heures">
+                        <div className='row'>
+                            <div className='col-6'>
+                                <SensorDataChart label="Oxydes d'azote" pollutant="oxydants" color="#7400b8"  />
+                            </div>
+                            <div className='col-6'>
+                                <SensorDataChart label="Monoxyde de carbone" pollutant="reducers" color="#80ffdb" unit="ppm"/>
+                            </div>
+                            <div className='col-6'>
+                                <SensorDataChart label="Ammoniac" pollutant="nh3" color="#5e60ce" unit="ppm"/>
+                            </div>
+                            <div className='col-6'>
+                                <SensorDataChart label="Humidité" pollutant="humidity" color="#64dfdf" unit="%"/>
+                            </div>
+                            <div className='col-6'>
+                                <SensorDataChart label="Particule PM1" pollutant="pm1" color="#4ea8de" unit="ppm"/>
+                            </div>
+                            <div className='col-6'>
+                                <SensorDataChart label="Particules PM10" pollutant="pm10" color="#5390d9" unit="ppm"/>
+                            </div>
+                        </div>
+                    </Card>
                 </div>
             </div>
         </div>
