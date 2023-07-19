@@ -3,6 +3,7 @@ import Card from "../components/widgets/Card"
 import { useState } from "react"
 import PercentageWidget from "../components/widgets/PercentageWidget"
 import SensorList from "../components/widgets/SensorList"
+import HelpWidget from "../components/widgets/HelpWidget"
 
 export const Data = [
     {
@@ -48,7 +49,21 @@ function Home() {
                     </Card>
                 </div>
                 <div className="col-12 col-lg-5 mb-3">
-                    <Card title="Votre taux d'humidité">
+                    <Card title="Votre taux d'humidité"
+                    helper={
+                        <HelpWidget modalDirection="left">
+                            <p className="pb-1">
+                                Bien qu’un taux d’humidité acceptable dépende de nombreux facteurs, l'humidité idéale pour une maison doit généralement être comprise entre 40 et 70 %.
+                            </p>
+                            <p className="pb-1">
+                                En dessous de 40%, vous ferez face à un air très sec. Pourront se multiplier les sensations d’irritations ou de gorge sèche ou d’yeux secs.
+                            </p>
+                            <p className="pb-1">
+                                Au-delà de 70%, vous risquez de faire face à un fort taux d’humidité. De la moisissure risque d’apparaître. Outre le côté inesthétique, elle peut entraîner des difficultés respiratoires (asthme, allergies, essoufflements, etc.).
+                            </p>
+                        </HelpWidget>
+                    }
+                    >
                         <div className="row">
                             <div className="col-6 d-flex flex-column align-items-center">
                                 <p className="text-center mb-3">Humidité la plus importante</p>
@@ -58,6 +73,8 @@ function Home() {
                                 <p className="text-center mb-3">Humidité la plus faible</p>
                                 <PercentageWidget color={"#0085FF"} percentage={45}  />
                             </div>
+                        </div>
+                        <div className="d-flex justify-content-end">
                         </div>
                     </Card>
                 </div>
