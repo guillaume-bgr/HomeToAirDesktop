@@ -2,7 +2,7 @@ import TopBar from "../components/layout/Topbar"
 import Card from "../components/widgets/Card"
 import { useState } from "react"
 import PercentageWidget from "../components/widgets/PercentageWidget"
-import Carousel from "../components/widgets/Carousel";
+import SensorList from "../components/widgets/SensorList"
 
 export const Data = [
     {
@@ -42,12 +42,12 @@ function Home() {
                     ]}
                     />
                 </div>
-                <div className="col-7">
+                <div className="col-12 col-lg-7 mb-3">
                     <Card title="Bienvenue Jenna Dohn !">
                         <p>Votre moyenne de taux de pollution est de 12%</p>
                     </Card>
                 </div>
-                <div className="col-5">
+                <div className="col-12 col-lg-5 mb-3">
                     <Card title="Votre taux d'humidité">
                         <div className="row">
                             <div className="col-6 d-flex flex-column align-items-center">
@@ -58,15 +58,11 @@ function Home() {
                                 <p className="text-center">Humidité la plus faible</p>
                                 <PercentageWidget color={"#0085FF"} percentage={45}  />
                             </div>
-                            <div className="col-12">
-
-                            </div>
-                            <div className=""></div>
                         </div>
                     </Card>
                 </div>
                 <div className="col-12">
-                    <Carousel />
+                    <SensorList />
                 </div>
             </div>
         </div>

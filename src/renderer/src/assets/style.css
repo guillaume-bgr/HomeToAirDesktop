@@ -25,6 +25,7 @@
 
 body {
     background-color: var(--home2air-body) !important;
+    overflow-x: hidden;
 }
 
 main {
@@ -51,10 +52,28 @@ h5 {
     font-size: 1em !important;
 }
 
+.text-sm {
+    font-size: 0.8em;
+}
+
 .text-white {
     color: var(--home2air-white);
 }
 
+.text-primary {
+    color: var(--home2air-primary);
+}
+
+.link {
+    color: var(--home2air-primary);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+ 
 /* Scrollbar */
 
 /* width */
@@ -214,6 +233,14 @@ h1.page-title {
 
 .card .subtitle {
     color: var(--home2air-grey);
+}
+
+.card.sensor .card-header {
+    margin-bottom: 0;
+}
+
+.card.sensor h2 {
+    font-size: 1em;
 }
 
 /* Fin cards */
@@ -400,6 +427,16 @@ tr {
     width: 100%;
 }
 
+.carousel-slides {
+    left: 0;
+}
+
+
+.carousel-slides.moving {
+    transition: left 0.5s ease-out;
+    /* transition: left 1s ease-in-out; */
+}
+
 .custom-carousel .carousel-controls {
     top: 0;
     position: absolute;
@@ -407,11 +444,10 @@ tr {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    
+    align-items: center;   
 }
 
-
-
-
+.custom-carousel .carousel-controls .button-left, .custom-carousel .carousel-controls .button-right {
+    width: 75px;
+}
 
