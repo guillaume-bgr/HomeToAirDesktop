@@ -51,11 +51,11 @@ function Home() {
                     <Card title="Votre taux d'humidité">
                         <div className="row">
                             <div className="col-6 d-flex flex-column align-items-center">
-                                <p className="text-center">Humidité la plus importante</p>
+                                <p className="text-center mb-3">Humidité la plus importante</p>
                                 <PercentageWidget color={"#c22020"} percentage={80} />
                             </div>
                             <div className="col-6 d-flex flex-column align-items-center">
-                                <p className="text-center">Humidité la plus faible</p>
+                                <p className="text-center mb-3">Humidité la plus faible</p>
                                 <PercentageWidget color={"#0085FF"} percentage={45}  />
                             </div>
                         </div>

@@ -43,7 +43,7 @@ function PercentageWidget (props) {
             }} />
             <div className="fakeCircle"></div>
             <div className="percentage">
-                <span className="mb-0">{props.percentage} %</span>
+                <span className="mb-0" style={{color: props.color}}>{props.percentage} %</span>
             </div>
         </div>
     )
