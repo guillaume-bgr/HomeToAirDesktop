@@ -1,6 +1,6 @@
 function Card(props) {
     return (
-        <div className="card no-border">
+        <div className={"card no-border " + props.className}>
             <div className="card-body">
                 <div className="card-header">
                     <div className="card-headings">
