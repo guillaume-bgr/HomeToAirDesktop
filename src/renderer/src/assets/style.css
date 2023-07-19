@@ -318,6 +318,7 @@ tr {
     border: none;
     width: 100%;
     padding: 8px;
+    outline: none;
 }
 
 .form-input-solid::placeholder {
@@ -327,7 +328,6 @@ tr {
 .form-control-solid:focus {
     background-color: var(--home2air-light);
     border: 0;
-    outline: none;
 }
 
 /* Champ select custom */
@@ -339,6 +339,7 @@ tr {
     background-color: var(--home2air-form-bg);
     cursor: pointer;
     color: var(--home2air-muted);
+    outline: none;
 }
 
 .custom-select-solid .placeholder-container {
