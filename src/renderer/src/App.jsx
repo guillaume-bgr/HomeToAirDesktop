@@ -3,6 +3,7 @@ import Sensors from './pages/Sensors/Sensors'
 import Template from './pages/Template'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import AddSensor from './components/forms/add/AddSensor'
+import ShowSensor from './pages/Sensors/ShowSensor'
 
 const router = createBrowserRouter([
   {
@@ -24,8 +25,12 @@ const router = createBrowserRouter([
             path: '/sensors/add',
             element: <AddSensor />
           },
+          { 
+            path: '/sensors/:id',
+            element: <ShowSensor />
+          }
         ]
-      }
+      },
     ]
   }
 ])

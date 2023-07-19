@@ -1,4 +1,5 @@
 import Card from "./Card";
+import { Link } from 'react-router-dom'
 
 function SensorList() {
     return (
@@ -54,7 +55,7 @@ function SensorList() {
                 </div>
             </div>
             <div className="d-flex justify-content-end">
-                <a className="link">Tout voir</a>
+                <Link className="link" to="/sensors">Tout voir</ Link>
             </div>
         </div>
         
