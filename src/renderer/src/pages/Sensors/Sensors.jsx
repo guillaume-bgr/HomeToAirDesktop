@@ -96,8 +96,8 @@ function Sensors() {
                             </svg>
                           </span>
                         </ Link>
-                        <a
-                          href="#"
+                        <Link
+                          to="/sensors/edit"
                           className="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
                         >
                           <span className="svg-icon svg-icon-3">
@@ -119,7 +119,7 @@ function Sensors() {
                               ></path>
                             </svg>
                           </span>
-                        </a>
+                        </Link>
                         <a
                           href="javascript:void(0)"
                           className="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"

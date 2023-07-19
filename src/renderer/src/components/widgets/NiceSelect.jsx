@@ -1,8 +1,8 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 function NiceSelect(props) {
     const [optionsDisplay, setOptionsDisplay] = useState(false);
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState(props.value);
     const [label, setLabel] = useState(null);
 
     const handleValue = (option) => {
@@ -11,6 +11,10 @@ function NiceSelect(props) {
         setOptionsDisplay(false);
     }
 
+    useEffect(() => {
+        setValue(1)
+    }, [])
+    
     return (
         <>
             <select name={props.name} id={props.name} className="d-none">
