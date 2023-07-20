@@ -3,7 +3,7 @@ import Select from 'react-select';
 
 function NiceSelect(props) {
     return (
-        <Select  className={props.className} styles={{
+        <Select name={props.name} isMulti={props.isMulti} className={props.className} styles={{
             control: (baseStyles, state) => ({
             ...baseStyles,
             backgroundColor: state.isFocused ? '#ffffff' : '#f4f4f4',
@@ -19,7 +19,7 @@ function NiceSelect(props) {
                 ...baseStyles,
                 backgroundColor: state.isSelected ? '#0085FF' : state.isFocused ? '#80c1ff' : '#FFFFFF'
             })
-        }} placeholder="Choisir un parc" options={props.options}/>
+        }} placeholder={props.placeholder} options={props.options}/>
     )
 }
 

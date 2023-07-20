@@ -6,8 +6,9 @@ function ParkForm(props) {
     let formOptions = {
         pageTitle: 'Ajouter un parc',
         data: {
-            name: props.sensor?.name,
-            park: props.sensor?.Park,
+            name: props.park?.name,
+            park: props.park?.Building,
+            sensors: props.park?.Sensors
         }
     }
 
@@ -31,7 +32,7 @@ function ParkForm(props) {
                     <Card title={formOptions.pageTitle}>
                         <form method="POST" className="py-2">
                             <input type="text" name="name" value={formOptions.data.name} className="form-input-solid shadow-none mb-3" placeholder="Nom du parc" />
-                            <NiceSelect name="park" value={formOptions.data.park?.id} placeholder={formOptions.data.park?.name ? formOptions.data.park?.name : "Choisir une adresse"} options={
+                            <NiceSelect name="address" placeholder={"Choisir une adresse"} className="mb-3" options={
                                 [
                                     {
                                         value: 1,
@@ -44,6 +45,22 @@ function ParkForm(props) {
                                     {
                                         value: 3,
                                         label: 'Adresse 3'
+                                    }
+                                ]
+                            } />
+                            <NiceSelect name="sensors" placeholder={"Choisir un capteur"} className="mb-3" options={
+                                [
+                                    {
+                                        value: 1,
+                                        label: 'Capteur 1'
+                                    },
+                                    {
+                                        value: 2,
+                                        label: 'Capteur 2'
+                                    },
+                                    {
+                                        value: 3,
+                                        label: 'Capteur 3'
                                     }
                                 ]
                             } />

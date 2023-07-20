@@ -43,12 +43,12 @@ function Home() {
                     ]}
                     />
                 </div>
-                <div className="col-12 col-lg-7 mb-3">
+                <div className="col-12 col-lg-7 mb-4">
                     <Card title="Bienvenue Jenna Dohn !">
                         <p>Votre moyenne de taux de pollution est de 12%</p>
                     </Card>
                 </div>
-                <div className="col-12 col-lg-5 mb-3">
+                <div className="col-12 col-lg-5 mb-4">
                     <Card title="Votre taux d'humidité"
                     helper={
                         <HelpWidget modalDirection="left">
@@ -78,7 +78,7 @@ function Home() {
                         </div>
                     </Card>
                 </div>
-                <div className="col-12">
+                <div className="col-12 mb-4">
                     <SensorList />
                 </div>
             </div>
