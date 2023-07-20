@@ -155,7 +155,8 @@
 			fill: false,
 			borderColor: props.color,
 			borderWidth: 2,
-			borderJoinStyle: 'bevel'
+			borderJoinStyle: 'bevel',
+			pointRadius: 2
 		}
 		]
 	}

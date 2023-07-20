@@ -1,6 +1,6 @@
-import Card from "../../widgets/Card";
-import TopBar from "../../layout/Topbar";
-import NiceSelect from "../../widgets/NiceSelect";
+import Card from "../widgets/Card";
+import TopBar from "../layout/Topbar";
+import NiceSelect from "../widgets/NiceSelect";
 
 function SensorForm(props) {
     let formOptions = {

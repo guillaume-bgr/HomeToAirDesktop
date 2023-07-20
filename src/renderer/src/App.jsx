@@ -3,7 +3,10 @@ import Sensors from './pages/Sensors/Sensors'
 import Template from './pages/Template'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ShowSensor from './pages/Sensors/ShowSensor'
-import SensorForm from './components/forms/add/SensorForm'
+import SensorForm from './components/forms/SensorForm'
+import Parks from './pages/Parks/Parks'
+import ShowPark from './pages/Parks/ShowPark'
+import ParkForm from './components/forms/ParkForm'
 
 const router = createBrowserRouter([
   {
@@ -35,6 +38,23 @@ const router = createBrowserRouter([
           },
         ]
       },
+      {
+        path: '/parks',
+        children: [
+          {
+            index: true,
+            element: <Parks />
+          },
+          {
+            path: '/parks/:id',
+            element: <ShowPark />
+          },
+          {
+            path: '/parks/add',
+            element: <ParkForm />
+          }
+        ]
+      }
     ]
   }
 ])
