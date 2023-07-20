@@ -93,6 +93,11 @@ p {
     background-color: var(--home2air-success);
 }
 
+.btn-danger {
+    background-color: var(--home2air-danger);
+    border-color: var(--home2air-danger);
+}
+
 .link {
     color: var(--home2air-primary);
     text-decoration: none;

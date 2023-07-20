@@ -4,6 +4,8 @@ import Template from './pages/Template'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ShowSensor from './pages/Sensors/ShowSensor'
 import SensorForm from './components/forms/add/SensorForm'
+import Parks from './pages/Parks/Parks'
+import ShowPark from './pages/Parks/ShowPark'
 
 const router = createBrowserRouter([
   {
@@ -35,6 +37,19 @@ const router = createBrowserRouter([
           },
         ]
       },
+      {
+        path: '/parks',
+        children: [
+          {
+            index: true,
+            element: <Parks />
+          },
+          {
+            path: '/parks/:id',
+            element: <ShowPark />
+          }
+        ]
+      }
     ]
   }
 ])
