@@ -13,6 +13,7 @@ function NiceSelect(props) {
 
     useEffect(() => {
         setValue(1)
+        setLabel()
     }, [])
     
     return (
