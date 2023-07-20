@@ -3,10 +3,18 @@ import Card from '../../components/widgets/Card';
 import TopBar from '../../components/layout/Topbar';
 import AqiChart from '../../components/widgets/AqiChart';
 import SensorDataChart from '../../components/widgets/SensorDataChart'
+import PercentageWidget from '../../components/widgets/PercentageWidget';
+import { Link } from 'react-router-dom'
+import Gauge from '../../components/widgets/Gauge';
+import { ValidationAlert } from '../../utils/PopupUtils';
 
 function ShowPark() {
     // Sensor ID
     let { id } = useParams();
+
+    const deleteItem = () => {
+        ValidationAlert('Êtes-vous sûr de vouloir supprimer cet élément ?')
+    } 
 
     return (
         <div className='show-sensor container'>
@@ -16,8 +24,8 @@ function ShowPark() {
                     pageTitle="Mon capteur"
 					breadcrumbs={[
 						{title: 'Accueil', path: '/'},
-						{title: 'Mes capteurs', path: '/sensors'},
-                        {title: 'Mon capteur'}
+						{title: 'Mes parcs', path: '/parks'},
+                        {title: 'Mon parc'}
 					]}
 					buttons={[{title: 'Retour à la liste', path:'/', className: 'btn-secondary'}]}
                     />
@@ -47,14 +55,6 @@ function ShowPark() {
                                         <div className="description text-muted mt-2 d-flex">
                                             <div className='me-3'>
                                                 <span className="me-2"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M6 7H3C2.4 7 2 6.6 2 6V3C2 2.4 2.4 2 3 2H6C6.6 2 7 2.4 7 3V6C7 6.6 6.6 7 6 7Z" fill="currentColor"/>
-                                                    <path opacity="0.3" d="M13 7H10C9.4 7 9 6.6 9 6V3C9 2.4 9.4 2 10 2H13C13.6 2 14 2.4 14 3V6C14 6.6 13.6 7 13 7ZM21 6V3C21 2.4 20.6 2 20 2H17C16.4 2 16 2.4 16 3V6C16 6.6 16.4 7 17 7H20C20.6 7 21 6.6 21 6ZM7 13V10C7 9.4 6.6 9 6 9H3C2.4 9 2 9.4 2 10V13C2 13.6 2.4 14 3 14H6C6.6 14 7 13.6 7 13ZM14 13V10C14 9.4 13.6 9 13 9H10C9.4 9 9 9.4 9 10V13C9 13.6 9.4 14 10 14H13C13.6 14 14 13.6 14 13ZM21 13V10C21 9.4 20.6 9 20 9H17C16.4 9 16 9.4 16 10V13C16 13.6 16.4 14 17 14H20C20.6 14 21 13.6 21 13ZM7 20V17C7 16.4 6.6 16 6 16H3C2.4 16 2 16.4 2 17V20C2 20.6 2.4 21 3 21H6C6.6 21 7 20.6 7 20ZM14 20V17C14 16.4 13.6 16 13 16H10C9.4 16 9 16.4 9 17V20C9 20.6 9.4 21 10 21H13C13.6 21 14 20.6 14 20ZM21 20V17C21 16.4 20.6 16 20 16H17C16.4 16 16 16.4 16 17V20C16 20.6 16.4 21 17 21H20C20.6 21 21 20.6 21 20Z" fill="currentColor"/>
-                                                    </svg>
-                                                </span>
-                                                <span>Etage 2</span>
-                                            </div>
-                                            <div className='me-3'>
-                                                <span className="me-2"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path opacity="0.3" d="M18.0624 15.3453L13.1624 20.7453C12.5624 21.4453 11.5624 21.4453 10.9624 20.7453L6.06242 15.3453C4.56242 13.6453 3.76242 11.4453 4.06242 8.94534C4.56242 5.34534 7.46242 2.44534 11.0624 2.04534C15.8624 1.54534 19.9624 5.24534 19.9624 9.94534C20.0624 12.0453 19.2624 13.9453 18.0624 15.3453Z" fill="currentColor"/>
                                                 <path d="M12.0624 13.0453C13.7193 13.0453 15.0624 11.7022 15.0624 10.0453C15.0624 8.38849 13.7193 7.04535 12.0624 7.04535C10.4056 7.04535 9.06241 8.38849 9.06241 10.0453C9.06241 11.7022 10.4056 13.0453 12.0624 13.0453Z" fill="currentColor"/>
                                                 </svg>
@@ -68,33 +68,132 @@ function ShowPark() {
                                 </div>
                             </div>
                             <div className='col-4 d-flex justify-content-end align-items-start'>
-                                <button className='btn btn-primary'>Modifier le capteur</button>
-                                <button className='btn btn-danger ms-2'>Supprimer le capteur</button>
+                                <button className='btn btn-primary'>Modifier le Parc</button>
+                                <button className='btn btn-danger ms-2'>Supprimer le Parc</button>
                             </div>
                         </div>
                     </Card>
                 </div>
-                <div className='col-12 mt-3'>
-                    <Card title="Données des 12 dernières heures">
-                        <div className='row'>
-                            <div className='col-6'>
-                                <SensorDataChart label="Oxydes d'azote" pollutant="oxydants" color="#7400b8"  />
-                            </div>
-                            <div className='col-6'>
-                                <SensorDataChart label="Monoxyde de carbone" pollutant="reducers" color="#80ffdb" unit="ppm"/>
-                            </div>
-                            <div className='col-6'>
-                                <SensorDataChart label="Ammoniac" pollutant="nh3" color="#5e60ce" unit="ppm"/>
-                            </div>
-                            <div className='col-6'>
-                                <SensorDataChart label="Humidité" pollutant="humidity" color="#64dfdf" unit="%"/>
-                            </div>
-                            <div className='col-6'>
-                                <SensorDataChart label="Particule PM1" pollutant="pm1" color="#4ea8de" unit="ppm"/>
-                            </div>
-                            <div className='col-6'>
-                                <SensorDataChart label="Particules PM10" pollutant="pm10" color="#5390d9" unit="ppm"/>
-                            </div>
+                <div className='col-3 mt-4'>
+                    <Card title="Humidité moyenne des capteurs" subtitle="12 dernières heures">
+                        <div className='d-flex justify-content-center mt-2'>
+                            <PercentageWidget percentage={50} color={'#0085FF'}/>
+                        </div>
+                    </Card>
+                </div>
+                <div className='col-9 mt-4'>
+                    <Card title="Evolution du taux de CO" subtitle="12 dernières heures">
+                        <SensorDataChart label="Monoxyde de carbone" pollutant="reducers" color="#80ffdb" unit="ppm" />
+                    </Card>
+                </div>
+                <div className='col-12 my-4'>
+                    <Card title="Capteurs du parc">
+                        <div className="table-responsive">
+                        <table className="table">
+                            <thead>
+                            <tr>
+                                <th className="">
+                                <div className="form-check">
+                                    <input className="form-check-input" type="checkbox" value="1" />
+                                </div>
+                                </th>
+                                <th className="">Nom</th>
+                                <th className="">Dernier AQI</th>
+                                <th className="">Parc</th>
+                                <th className="text-end">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                <div className="w-100">
+                                    <input
+                                    className="form-check-input mx-auto"
+                                    type="checkbox"
+                                    value="1"
+                                    ></input>
+                                </div>
+                                </td>
+                                <td>
+                                <div className="d-flex justify-content-start flex-column">
+                                    <a href="#" className="fw-bold">
+                                    Mon premier capteur
+                                    </a>
+                                    <span className="text-muted">Ajouté le 24/05/22</span>
+                                </div>
+                                </td>
+                                <td>
+                                    <Gauge percent={34} />
+                                </td>
+                                <td>
+                                <div className="d-flex justify-content-start flex-column">
+                                    <a href="#" className="fw-bold">
+                                    Mon premier parc
+                                    </a>
+                                    <span className="text-muted">Parc par défaut</span>
+                                </div>
+                                </td>
+                                <td>
+                                <div className="d-flex justify-content-end flex-shrink-0">
+                                    <Link
+                                    to="/sensors/edit"
+                                    className="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
+                                    >
+                                    <span className="svg-icon svg-icon-3">
+                                        <svg
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                        <path
+                                            opacity="0.3"
+                                            d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z"
+                                            fill="currentColor"
+                                        ></path>
+                                        <path
+                                            d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z"
+                                            fill="currentColor"
+                                        ></path>
+                                        </svg>
+                                    </span>
+                                    </Link>
+                                    <a
+                                    href="javascript:void(0)"
+                                    className="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
+                                    onClick={() => deleteItem()}
+                                    >
+                                    <span className="svg-icon svg-icon-3">
+                                        <svg
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                        <path
+                                            d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z"
+                                            fill="currentColor"
+                                        ></path>
+                                        <path
+                                            opacity="0.5"
+                                            d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z"
+                                            fill="currentColor"
+                                        ></path>
+                                        <path
+                                            opacity="0.5"
+                                            d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z"
+                                            fill="currentColor"
+                                        ></path>
+                                        </svg>
+                                    </span>
+                                    </a>
+                                </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                         </div>
                     </Card>
                 </div>
