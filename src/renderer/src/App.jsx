@@ -7,6 +7,7 @@ import SensorForm from './components/forms/SensorForm'
 import Parks from './pages/Parks/Parks'
 import ShowPark from './pages/Parks/ShowPark'
 import ParkForm from './components/forms/ParkForm'
+import Profile from './pages/Profile/Profile'
 
 const router = createBrowserRouter([
   {
@@ -60,7 +61,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <></>
+            element: <Profile />
           }
         ]
       }
