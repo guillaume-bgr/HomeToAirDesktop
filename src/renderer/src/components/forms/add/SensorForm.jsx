@@ -31,7 +31,7 @@ function SensorForm(props) {
                     <Card title={formOptions.pageTitle}>
                         <form method="POST" className="py-2">
                             <input type="text" name="name" value={formOptions.data.name} className="form-input-solid shadow-none mb-3" placeholder="Nom du capteur" />
-                            <NiceSelect name="park" value={formOptions.data.park?.id} placeholder={formOptions.data.park?.name ? formOptions.data.park?.name : "Choisir un parc"} options={
+                            <NiceSelect className="mb-2" options={
                                 [
                                     {
                                         value: 1,
