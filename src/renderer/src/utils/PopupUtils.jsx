@@ -10,7 +10,7 @@ export const SimpleAlert = (text='Alerte', icon='info', showCancelButton=false, 
       })
 }
 
-export const TimerAlert = (text= 'Timer Alert', icon= 'info', showCancelButton=false, showCloseButton=false, position='center', timer = 1500) => {
+export const TimerAlert = (text= 'Timer Alert', icon= 'info', position='center', showCancelButton=false, showCloseButton=false, timer = 1500) => {
     Swal.fire({
         title: text,
         icon: icon,
@@ -43,3 +43,13 @@ export const ValidationAlert = (
         console.log(result);
       })
 }
+
+export const ToastAlert = (text = 'Erreur', position = 'top-right', timer = 3000) => {
+  Swal.fire({toast: true,
+  icon: 'error',
+  title: text,
+  position: position,
+  showConfirmButton: false,
+  timer: timer,
+  timerProgressBar: true,
+})}

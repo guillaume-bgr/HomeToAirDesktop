@@ -1,7 +1,7 @@
 import TopBar from '../../components/layout/Topbar'
 import Card from '../../components/widgets/Card'
 import Gauge from '../../components/widgets/Gauge'
-import { ValidationAlert, SimpleAlert } from '../../utils/PopupUtils'
+import { ValidationAlert} from '../../utils/PopupUtils'
 import { Link } from 'react-router-dom'
 
 function Sensors() {

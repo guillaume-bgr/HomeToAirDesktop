@@ -80,7 +80,6 @@ p {
 .text-white {
     color: var(--home2air-white);
 }
-
 .text-primary {
     color: var(--home2air-primary) !important; 
 }
@@ -526,7 +525,6 @@ tr {
     top: 30px;
     font-size: 0.9em;
 }
-
 .help-widget-popup.right {
     left: 0;
 }
@@ -537,4 +535,24 @@ tr {
 }
 
 /* Fin HelpWidget */
+/*Connect Padge */
 
+.card-width{
+    width: 40%;
+}
+.connect-input{
+    background-color: var(--home2air-form-bg);
+    border: none;
+}
+.connect-input::placeholder {
+    color: var(--home2air-muted);
+}
+.nav-link{
+    color:var(--home2air-form-bg)
+}
+.nav-link.active{
+    color: var(--home2air-dark);
+}
+.nav-link:hover{
+    color: var(--home2air-form-bg);
+}
