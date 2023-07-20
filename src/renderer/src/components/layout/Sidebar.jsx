@@ -1,6 +1,7 @@
 import logo from './../../assets/img/logos/logo-Home2Air-white.png'
 import placeholder from './../../assets/img/placeholder/woman.jpg'
 import MainMenu from './MainMenu';
+import {Link} from 'react-router-dom'
 
 function Sidebar() {
     return (
@@ -18,9 +19,9 @@ function Sidebar() {
                 </div>
                 <div className="account">
                     <span className="text-white text-center w-100 d-block">Bonjour, Jenna Doe</span>
-                    <div className="profile-picture">
+                    <Link to="/profile" className="profile-picture d-block">
                         <img className="img-fluid" src={placeholder} />
-                    </div>
+                    </Link>
                     <span className="disconnect text-center w-100 d-block">Se déconnecter</span>
                 </div>
             </div> 
