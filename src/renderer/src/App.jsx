@@ -54,6 +54,15 @@ const router = createBrowserRouter([
             element: <ParkForm />
           }
         ]
+      },
+      {
+        path: '/profile',
+        children: [
+          {
+            index: true,
+            element: <></>
+          }
+        ]
       }
     ]
   }
