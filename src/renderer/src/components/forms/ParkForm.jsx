@@ -4,7 +4,7 @@ import NiceSelect from "../widgets/NiceSelect";
 
 function ParkForm(props) {
     let formOptions = {
-        pageTitle: 'Ajouter un capteur',
+        pageTitle: 'Ajouter un parc',
         data: {
             name: props.sensor?.name,
             park: props.sensor?.Park,
@@ -12,7 +12,7 @@ function ParkForm(props) {
     }
 
     if (props.action == 'edit') {
-        formOptions.pageTitle = 'Modifier un capteur';
+        formOptions.pageTitle = 'Modifier un parc';
     }
 
     return (
@@ -21,29 +21,29 @@ function ParkForm(props) {
             pageTitle={formOptions.pageTitle}
             breadcrumbs={[
                 {title: 'Accueil', path: '/'},
-                {title: 'Capteurs', path: '/sensors'},
+                {title: 'Parcs', path: '/parks'},
                 {title: formOptions.pageTitle}
             ]}
-            buttons={[{title: 'Retour à la liste', path:'/sensors', className: 'btn-secondary'}]}
+            buttons={[{title: 'Retour à la liste', path:'/parks', className: 'btn-secondary'}]}
             />
             <div className="row">
                 <div className="col-12">
                     <Card title={formOptions.pageTitle}>
                         <form method="POST" className="py-2">
-                            <input type="text" name="name" value={formOptions.data.name} className="form-input-solid shadow-none mb-3" placeholder="Nom du capteur" />
-                            <NiceSelect name="park" value={formOptions.data.park?.id} placeholder={formOptions.data.park?.name ? formOptions.data.park?.name : "Choisir un parc"} options={
+                            <input type="text" name="name" value={formOptions.data.name} className="form-input-solid shadow-none mb-3" placeholder="Nom du parc" />
+                            <NiceSelect name="park" value={formOptions.data.park?.id} placeholder={formOptions.data.park?.name ? formOptions.data.park?.name : "Choisir une adresse"} options={
                                 [
                                     {
                                         value: 1,
-                                        label: 'Park 1'
+                                        label: 'Adresse 1'
                                     },
                                     {
                                         value: 2,
-                                        label: 'Park 2'
+                                        label: 'Adresse 2'
                                     },
                                     {
                                         value: 3,
-                                        label: 'Park 3'
+                                        label: 'Adresse 3'
                                     }
                                 ]
                             } />
