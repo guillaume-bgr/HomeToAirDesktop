@@ -120,8 +120,8 @@ function Sensors() {
                             </svg>
                           </span>
                         </Link>
-                        <a
-                          href="javascript:void(0)"
+                        <Link
+                          to="javascript:void(0)"
                           className="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
                           onClick={() => deleteItem()}
                         >
@@ -149,7 +149,7 @@ function Sensors() {
                               ></path>
                             </svg>
                           </span>
-                        </a>
+                        </Link>
                       </div>
                     </td>
                   </tr>
