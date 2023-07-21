@@ -24,7 +24,7 @@ function TopBar(props) {
                             }) : null}
                         </ul>
                     </div>
-                    <div className="toolbar">
+                    <div className="topbar-toolbar">
                         {props.buttons ? props.buttons.map((button, key) => {
                             if (button.path) {
                                 return <Link key={key} className={button.className ? 'ms-2 btn '+button.className : 'ms-2 btn btn-primary'} to={button.path}>{button.title}</ Link>
