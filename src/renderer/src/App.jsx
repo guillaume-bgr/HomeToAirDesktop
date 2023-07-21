@@ -8,6 +8,8 @@ import Parks from './pages/Parks/Parks'
 import ShowPark from './pages/Parks/ShowPark'
 import ParkForm from './components/forms/ParkForm'
 import Profile from './pages/Profile/Profile'
+import { AuthContext } from './context/AuthContext'
+import { useState } from 'react'
 
 const router = createBrowserRouter([
   {
@@ -66,11 +68,25 @@ const router = createBrowserRouter([
         ]
       }
     ]
-  }
+  },
 ])
 
 function App() {
-  return <RouterProvider router={router} />
+  const [token, setToken] = useState('');
+  const [refresh, setRefresh] = useState('');
+  const [userId, setUserId] = useState('');
+  return (
+    <AuthContext.Provider value={{
+      token: token,
+      setToken: setToken,
+      refresh: refresh,
+      setRefresh: setRefresh,
+      userId: userId,
+      setUserId: setUserId,
+    }}>
+      <RouterProvider router={router} />
+    </AuthContext.Provider>
+  )
 }
 
 export default App
