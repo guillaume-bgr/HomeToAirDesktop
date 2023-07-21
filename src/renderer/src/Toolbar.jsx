@@ -1,10 +1,10 @@
 import logo from '../src/assets/img/logos/logo-Mobile-white.png'
-import { ipcRenderer } from 'electron'
+// import { ipcRenderer } from 'electron'
 
 function Toolbar() {
-    const closeWindow = () => {
-        ipcRenderer.send('close');
-    } 
+    // const closeWindow = () => {
+    //     ipcRenderer.send('close');
+    // } 
 
     return (
         <div className="w-100 toolbar d-flex justify-content-between">
@@ -12,12 +12,12 @@ function Toolbar() {
                 <img className="img-fluid" src={logo} alt="Logo" />
             </div>
             <div className='toolbar-buttons'>
-                <button onClick={() => closeWindow()}>
+                {/* <button onClick={() => closeWindow()}>
                     <span className=""><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor"/>
                     </svg>
                     </span>
-                </button>
+                </button> */}
                 <button>
                     <span className=""><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path opacity="0.5" d="M18 2H9C7.34315 2 6 3.34315 6 5H8C8 4.44772 8.44772 4 9 4H18C18.5523 4 19 4.44772 19 5V16C19 16.5523 18.5523 17 18 17V19C19.6569 19 21 17.6569 21 16V5C21 3.34315 19.6569 2 18 2Z" fill="currentColor"/>
