@@ -29,7 +29,6 @@ function Sidebar() {
                     <Link to="/profile" className="profile-picture d-block">
                         <img className="img-fluid" src={placeholder} />
                     </Link>
-                    <span className="disconnect text-center w-100 d-block">Se déconnecter</span>
                     <span className="disconnect text-center w-100 d-block" onClick={() => removeToken()}>Se déconnecter</span>
                 </div>
             </div> 
