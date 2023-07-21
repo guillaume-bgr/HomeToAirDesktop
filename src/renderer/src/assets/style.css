@@ -12,6 +12,7 @@
     --bs-breadcrumb-divider: "-";
     --home2air-line-grey: #ced2e6;
     --home2air-primary: #0085FF;
+    --home2air-primary-transparent: #0084ff34;
     --home2air-success: #2ecc3b;
     --home2air-warning: #ebdb4b;
     --home2air-danger: #c22020;
@@ -93,7 +94,15 @@ p {
     color: var(--home2air-muted);
 }
 
+.badge {
+    vertical-align: text-top;
+}
+
 .badge-success {
+    background-color: var(--home2air-success);
+}
+
+.badge-primary {
     background-color: var(--home2air-success);
 }
 
@@ -214,6 +223,15 @@ h1.page-title {
     border-radius: 8px;
     overflow: hidden;
     margin: 0.5em auto;
+}
+
+.profile-picture-big {
+    width: 170px;
+    height: 170px;
+}
+
+.profile-picture-big img {
+    border-radius: 8px;
 }
 
 .disconnect {
@@ -537,4 +555,29 @@ tr {
 }
 
 /* Fin HelpWidget */
+
+/* Advice Card */
+
+.advice-card {
+    background-color: var(--home2air-primary-transparent);
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 0.9em;
+    max-width: 400px;
+}
+
+.advice-card .advice-card-heading {
+    font-weight: 600;
+}
+
+.advice-card + .advice-card-icon {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    font-size: 0.8em;
+    font-weight: 600;
+
+}
+
+/* Fin advice Card */
 
