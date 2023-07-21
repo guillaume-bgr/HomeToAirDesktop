@@ -5,8 +5,8 @@ import { TimerAlert, ToastAlert } from "../../../utils/PopupUtils";
 import { AuthContext } from "../../../context/AuthContext"; 
 
 export default function ConnectForm() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('GuillaumeBongrand1@gmail.com');
+    const [password, setPassword] = useState('Password2k1!');
     const context = useContext(AuthContext);
 
     const verifyForm = async () => {
@@ -43,11 +43,11 @@ export default function ConnectForm() {
 	return (
         <form>
             <div className="form-floating m-5 ">
-                <input type="email" className="form-control " id="floatingInput" onChange={e => setEmail(e.target.value)} placeholder="name@exemple.com"/>
+                <input type="email" defaultValue="GuillaumeBongrand1@gmail.com" className="form-control " id="floatingInput" onChange={e => setEmail(e.target.value)} placeholder="name@exemple.com"/>
                 <label htmlFor="floatingInput">Adresse mail</label>
             </div>
             <div className="form-floating m-5">
-                <input type="password" className="form-control connect-input" id="floatingPassword" onChange={e => setPassword(e.target.value)} placeholder="mot de passe"/>
+                <input type="password" defaultValue="Password2k1!" className="form-control connect-input" id="floatingPassword" onChange={e => setPassword(e.target.value)} placeholder="mot de passe"/>
                 <label htmlFor="floatingPassword">Mot de passe</label>
             </div>
             <div className="w-100 d-flex justify-content-center">
