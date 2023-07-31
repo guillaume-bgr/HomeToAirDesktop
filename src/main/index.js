@@ -1,14 +1,17 @@
-import { app, shell, BrowserWindow } from 'electron'
+import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
+let mainWindow = null
+
 function createWindow() {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 900,
     height: 670,
     show: false,
+    titleBarStyle: 'hidden',
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
@@ -16,6 +19,8 @@ function createWindow() {
       sandbox: false
     }
   })
+
+  mainWindow.maximize();
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
@@ -66,6 +71,25 @@ app.on('window-all-closed', () => {
     app.quit()
   }
 })
+
+ipcMain.handle('close', function(event, data) {
+  console.log('closing window');
+  mainWindow.close();
+})
+
+ipcMain.handle('unmaximize', function(event, data) {
+  mainWindow.unmaximize();
+})
+
+ipcMain.handle('maximize', function(event, data) {
+  mainWindow.maximize();
+})
+
+ipcMain.handle('hide', function(event, data) {
+  mainWindow.minimize();
+})
+
+
 
 // In this file you can include the rest of your app"s specific main process
 // code. You can also put them in separate files and require them here.

@@ -10,6 +10,7 @@ import ParkForm from './components/forms/ParkForm'
 import Profile from './pages/Profile/Profile'
 import { AuthContext } from './context/AuthContext'
 import { useState } from 'react'
+import Toolbar from './Toolbar'
 
 const router = createBrowserRouter([
   {
@@ -76,16 +77,19 @@ function App() {
   const [refresh, setRefresh] = useState('');
   const [userId, setUserId] = useState('');
   return (
-    <AuthContext.Provider value={{
-      token: token,
-      setToken: setToken,
-      refresh: refresh,
-      setRefresh: setRefresh,
-      userId: userId,
-      setUserId: setUserId,
-    }}>
-      <RouterProvider router={router} />
-    </AuthContext.Provider>
+    <>
+      <Toolbar />
+      <AuthContext.Provider value={{
+        token: token,
+        setToken: setToken,
+        refresh: refresh,
+        setRefresh: setRefresh,
+        userId: userId,
+        setUserId: setUserId,
+      }}>
+        <RouterProvider router={router} />
+      </AuthContext.Provider>
+    </>
   )
 }
 

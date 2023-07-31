@@ -579,6 +579,40 @@ tr {
 
 /* Fin advice Card */
 
+/* Toolbar */
+
+.toolbar {
+    -webkit-app-region: drag;
+    background-color: var(--home2air-dark);
+    color: var(--home2air-white);
+    font-size: 0.8em;
+}
+
+.toolbar-logo {
+    width: 35px;
+}
+
+.toolbar .toolbar-buttons {
+    display: flex;
+    -webkit-app-region: no-drag
+}
+
+.toolbar .toolbar-buttons button {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: 0;
+    transition: all 0.1s;
+    color: var(--home2air-white);
+}
+
+.toolbar .toolbar-buttons button:hover {
+    background-color: var(--home2air-white);
+    color: var(--home2air-dark);
+}
+
+/* Fin toolbar */
+
 /*Connect Page */
 
 .card-width{
@@ -589,7 +623,7 @@ tr {
     border: none;
 }
 .connect-input::placeholder {
-    color: var(--home2air-muted);
+    color: var(--home2air-muted);   
 }
 .nav-link{
     color:var(--home2air-form-bg)

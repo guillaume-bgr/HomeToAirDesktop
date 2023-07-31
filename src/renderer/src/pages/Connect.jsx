@@ -1,6 +1,6 @@
 import logo from '../assets/img/logos/logo-Home2Air-black.png'
-import ConnectForm from '../components/forms/add/ConnectForm';
-import RegisterForm from '../components/forms/add/RegisterForm';
+import ConnectForm from '../components/forms/auth/ConnectForm';
+import RegisterForm from '../components/forms/auth/RegisterForm';
 export default function Connect() {
 
 	return (
@@ -22,7 +22,7 @@ export default function Connect() {
                     <ConnectForm/>
                 </div>
                 <div className="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabIndex="0">
-                   <RegisterForm/>
+                    <RegisterForm/>
                 </div>
                 </div>
             </div>
