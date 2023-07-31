@@ -37,7 +37,7 @@ const router = createBrowserRouter([
             element: <ShowSensor />
           },
           {
-            path: '/sensors/edit',
+            path: '/sensors/edit/:id',
             element: <SensorForm action="edit" />
           },
         ]

@@ -3,17 +3,43 @@ import Card from '../../components/widgets/Card';
 import TopBar from '../../components/layout/Topbar';
 import AqiChart from '../../components/widgets/AqiChart';
 import SensorDataChart from '../../components/widgets/SensorDataChart'
+import { useContext, useEffect, useState } from 'react';
+import { fetchApi } from '../../utils/ApiUtil';
+import { AuthContext } from '../../context/AuthContext';
 
 function ShowSensor() {
     // Sensor ID
+    const context = useContext(AuthContext)
     let { id } = useParams();
+    const [sonde, setSonde] = useState(0);
+    const [park, setPark] = useState(0);
+    const [building, setBuilding] = useState(0);
+    
+    useEffect(() => {
+        const fetchAsync = async () => {
+            try {
+                let sensor = await fetchApi('GET', null, '/sensors/'+id, context.token);
+                setSonde(sensor.data)
+                let park = await fetchApi('GET', null, '/parks/'+sensor.data.parks_id, context.token);
+                setPark(park.data)
+                let building = await fetchApi('GET', null, '/buildings/'+park.data.building_id, context.token);
+                setBuilding(building.data)
+                console.log(building)
+                console.log(park.data)
+                console.log(sensor)
+                } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchAsync();
+    },[])
 
     return (
         <div className='show-sensor container'>
             <div className='row'>
                 <div className='col-12'>
                     <TopBar  
-                    pageTitle="Mon capteur"
+                    pageTitle={sonde ? (sonde.name ? sonde.name : "-") : "-"}
 					breadcrumbs={[
 						{title: 'Accueil', path: '/'},
 						{title: 'Mes capteurs', path: '/sensors'},
@@ -32,7 +58,7 @@ function ShowSensor() {
                                 <div className="ps-2">
                                     <div className='me-2'>
                                         <div className='d-flex align-items-baseline'>
-                                            <span className='h5 mb-0'>Mon capteur</span>
+                                            <span className='h5 mb-0'>{sonde ? (sonde.name ? sonde.name : "-") : "-"}</span>
                                             <div className='status ms-2'>
                                                 <span className='me-1 text-success'>En ligne</span>
                                                 <span className="text-success vertical-align-top">
@@ -43,7 +69,7 @@ function ShowSensor() {
                                                 </span>
                                             </div>
                                         </div>
-                                        <p className='text-muted text-sm'>Ajouté le 21/09/22</p>
+                                        <p className='text-muted text-sm'>Ajouté le {sonde ? (sonde.created_at ? sonde.created_at : "-") : "-"}</p>
                                         <div className="description text-muted mt-2 d-flex">
                                             <div className='me-3'>
                                                 <span className="me-2"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -51,7 +77,7 @@ function ShowSensor() {
                                                     <path opacity="0.3" d="M13 7H10C9.4 7 9 6.6 9 6V3C9 2.4 9.4 2 10 2H13C13.6 2 14 2.4 14 3V6C14 6.6 13.6 7 13 7ZM21 6V3C21 2.4 20.6 2 20 2H17C16.4 2 16 2.4 16 3V6C16 6.6 16.4 7 17 7H20C20.6 7 21 6.6 21 6ZM7 13V10C7 9.4 6.6 9 6 9H3C2.4 9 2 9.4 2 10V13C2 13.6 2.4 14 3 14H6C6.6 14 7 13.6 7 13ZM14 13V10C14 9.4 13.6 9 13 9H10C9.4 9 9 9.4 9 10V13C9 13.6 9.4 14 10 14H13C13.6 14 14 13.6 14 13ZM21 13V10C21 9.4 20.6 9 20 9H17C16.4 9 16 9.4 16 10V13C16 13.6 16.4 14 17 14H20C20.6 14 21 13.6 21 13ZM7 20V17C7 16.4 6.6 16 6 16H3C2.4 16 2 16.4 2 17V20C2 20.6 2.4 21 3 21H6C6.6 21 7 20.6 7 20ZM14 20V17C14 16.4 13.6 16 13 16H10C9.4 16 9 16.4 9 17V20C9 20.6 9.4 21 10 21H13C13.6 21 14 20.6 14 20ZM21 20V17C21 16.4 20.6 16 20 16H17C16.4 16 16 16.4 16 17V20C16 20.6 16.4 21 17 21H20C20.6 21 21 20.6 21 20Z" fill="currentColor"/>
                                                     </svg>
                                                 </span>
-                                                <span>Etage 2</span>
+                                                <span>{park ? (park.name ? park.name : "-") : "-"}</span>
                                             </div>
                                             <div className='me-3'>
                                                 <span className="me-2"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -59,7 +85,7 @@ function ShowSensor() {
                                                 <path d="M12.0624 13.0453C13.7193 13.0453 15.0624 11.7022 15.0624 10.0453C15.0624 8.38849 13.7193 7.04535 12.0624 7.04535C10.4056 7.04535 9.06241 8.38849 9.06241 10.0453C9.06241 11.7022 10.4056 13.0453 12.0624 13.0453Z" fill="currentColor"/>
                                                 </svg>
                                                 </span>
-                                                <span>Immeuble Amiens Henriville</span>
+                                                <span>{building ? (building.name ? building.name : "-") : "-"}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -78,22 +104,22 @@ function ShowSensor() {
                     <Card title="Données des 12 dernières heures">
                         <div className='row'>
                             <div className='col-6'>
-                                <SensorDataChart label="Oxydes d'azote" pollutant="oxydants" color="#7400b8"  />
+                                <SensorDataChart id={id} label="Oxydes d'azote" pollutant="oxydants" color="#7400b8"  />
                             </div>
                             <div className='col-6'>
-                                <SensorDataChart label="Monoxyde de carbone" pollutant="reducers" color="#80ffdb" unit="ppm"/>
+                                <SensorDataChart id={id} label="Monoxyde de carbone" pollutant="reducers" color="#80ffdb" unit="ppm"/>
                             </div>
                             <div className='col-6'>
-                                <SensorDataChart label="Ammoniac" pollutant="nh3" color="#5e60ce" unit="ppm"/>
+                                <SensorDataChart id={id} label="Ammoniac" pollutant="nh3" color="#5e60ce" unit="ppm"/>
                             </div>
                             <div className='col-6'>
-                                <SensorDataChart label="Humidité" pollutant="humidity" color="#64dfdf" unit="%"/>
+                                <SensorDataChart id={id} label="Humidité" pollutant="humidity" color="#64dfdf" unit="%"/>
                             </div>
                             <div className='col-6'>
-                                <SensorDataChart label="Particule PM1" pollutant="pm1" color="#4ea8de" unit="ppm"/>
+                                <SensorDataChart id={id} label="Particule PM1" pollutant="pm1" color="#4ea8de" unit="ppm"/>
                             </div>
                             <div className='col-6'>
-                                <SensorDataChart label="Particules PM10" pollutant="pm10" color="#5390d9" unit="ppm"/>
+                                <SensorDataChart id={id} label="Particules PM10" pollutant="pm10" color="#5390d9" unit="ppm"/>
                             </div>
                         </div>
                     </Card>
