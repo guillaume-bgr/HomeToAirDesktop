@@ -582,7 +582,7 @@ tr {
 /* Toolbar */
 
 .toolbar {
-    -webkit-app-region: drag;
+    /* -webkit-app-region: drag; */
     background-color: var(--home2air-dark);
     color: white;
     font-size: 0.8em;
