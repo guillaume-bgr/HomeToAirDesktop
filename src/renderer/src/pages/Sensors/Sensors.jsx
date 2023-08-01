@@ -1,7 +1,7 @@
 import TopBar from '../../components/layout/Topbar'
 import Card from '../../components/widgets/Card'
 import Gauge from '../../components/widgets/Gauge'
-import {ValidationAlert} from '../../utils/PopupUtils'
+import {ValidationAlert, TimerAlert} from '../../utils/PopupUtils'
 import { Link } from 'react-router-dom'
 import { fetchApi } from '../../utils/ApiUtil'
 import { useEffect, useContext, useState } from 'react'
@@ -12,14 +12,29 @@ function Sensors() {
 
   const context = useContext(AuthContext)
   const [parks, setParks] = useState(0);
-  const deleteItem = () => {
-    ValidationAlert('Êtes-vous sûr de vouloir supprimer cet élément ?')
+  const [reload, setReload] = useState(false);
+  const[deleteId, setDeleteId] = useState(0)
+  const deleteItem = (id) => {
+    setDeleteId(id)
+    ValidationAlert('Êtes-vous sûr de vouloir supprimer cet élément ?', deleteSensors, id)
+  }
+
+  const deleteSensors = async (id) => {
+    try {
+      let response = await fetchApi('DELETE', null, '/sensors/'+id, context.token);
+      console.log(response);
+      TimerAlert('Sonde suprimée', 'success')
+      setReload(!reload)
+      } catch (error) {
+      console.log(error);
+      TimerAlert(error.message, 'error')
+  }
   }
   
   useEffect(() => {
     const fetchAsync = async () => {
         try {
-            let response = await fetchApi('GET', null, '/customers/sensors/'+context.userId, context.token);
+            let response = await fetchApi('GET', null, '/customers/'+context.userId+'/sensors/', context.token);
             setParks(response)
             console.log(response);
             } catch (error) {
@@ -27,7 +42,7 @@ function Sensors() {
         }
     }
     fetchAsync();
-},[])
+},[reload])
 
   return (
   parks ?
@@ -145,7 +160,9 @@ function Sensors() {
                           <Link
                             href="javascript:void(0)"
                             className="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
-                            onClick={() => deleteItem()}
+                            onClick={() => {
+                              deleteItem(sonde.id)}
+                            }
                           >
                             <span className="svg-icon svg-icon-3">
                               <svg

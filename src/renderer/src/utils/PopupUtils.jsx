@@ -22,7 +22,9 @@ export const TimerAlert = (text= 'Timer Alert', icon= 'info', position='center',
 }
 
 export const ValidationAlert = (
-        text ='Êtes vous sur ?', 
+        text ='Êtes vous sur ?',
+        validationFunc = () => TimerAlert("C'est validé", "success"), 
+        params=0,
         icon = 'warning',
         showCancelButton = true,
         showCloseButton = false, 
@@ -40,7 +42,9 @@ export const ValidationAlert = (
         confirmButtonText: confirmButtonText,
         position: position,
       }).then((result) => {
-        console.log(result);
+        if (result.isConfirmed == true) {
+          validationFunc(params)
+        }
       })
 }
 
