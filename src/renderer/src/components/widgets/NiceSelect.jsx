@@ -2,8 +2,9 @@ import { useState, useEffect } from "react"
 import Select from 'react-select';
 
 function NiceSelect(props) {
+    console.log(props.options);
     return (
-        <Select name={props.name} isMulti={props.isMulti} className={props.className} styles={{
+        <Select name={props.name} isMulti={false} className={props.className} styles={{
             control: (baseStyles, state) => ({
             ...baseStyles,
             backgroundColor: state.isFocused ? '#ffffff' : '#f4f4f4',
@@ -19,7 +20,7 @@ function NiceSelect(props) {
                 ...baseStyles,
                 backgroundColor: state.isSelected ? '#0085FF' : state.isFocused ? '#80c1ff' : '#FFFFFF'
             })
-        }} placeholder={props.placeholder} options={props.options}/>
+        }} placeholder={props.placeholder} options={props.options} onChange={props.setSelected}/>
     )
 }
 
