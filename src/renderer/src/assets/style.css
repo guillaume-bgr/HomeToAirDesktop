@@ -29,9 +29,12 @@
     font-family: 'Poppins', sans-serif;
 }
 
+.app {
+    margin-top: 25px;
+}
+
 body {
     background-color: var(--home2air-body) !important;
-    overflow-x: hidden;
 }
 
 main {
@@ -586,13 +589,18 @@ tr {
     background-color: var(--home2air-dark);
     color: var(--home2air-white);
     font-size: 0.8em;
+    height: 25px;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
 }
 
 .toolbar-logo {
-    width: 35px;
+    width: 30px;
 }
 
 .toolbar .toolbar-buttons {
+    outline: none;
     display: flex;
     -webkit-app-region: no-drag
 }

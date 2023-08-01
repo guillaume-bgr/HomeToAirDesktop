@@ -11,12 +11,12 @@ function Template() {
         console.log("token is not null")
         console.log(context.token)
         return (
-            <>
+            <div className="app">
                 <Sidebar />
                 <main className="main">
                     <Outlet />
                 </main>
-            </>
+            </div>
         )
     }else{
         return (
