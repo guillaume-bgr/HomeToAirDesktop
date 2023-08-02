@@ -3,14 +3,35 @@ import Card from '../../components/widgets/Card'
 import Gauge from '../../components/widgets/Gauge'
 import { ValidationAlert, SimpleAlert } from '../../utils/PopupUtils'
 import { Link } from 'react-router-dom'
+import { fetchApi } from '../../utils/ApiUtil'
+import { useEffect, useContext, useState } from 'react'
+import { AuthContext } from '../../context/AuthContext'
 
 function Parks() {
+    const context = useContext(AuthContext)
+    const [parks, setParks] = useState(0);
+    const [reload, setReload] = useState(false);
+
+    useEffect(() => {
+        const fetchAsync = async () => {
+            try {
+                let response = await fetchApi('GET', null, '/customers/'+context.userId+'/sensors/', context.token);
+                setParks(response)
+                console.log(response);
+                } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchAsync();
+    },[reload])
+    
 
     const deleteItem = () => {
         ValidationAlert('Êtes-vous sûr de vouloir supprimer cet élément ?')
     } 
 
     return (
+        parks ?
         <div className="container">
         <div className="row">
             <div className="col-12">
@@ -36,11 +57,12 @@ function Parks() {
                             </th>
                             <th className="">Nom</th>
                             <th className="">Nombre de capteurs</th>
-                            <th className="">Adresse</th>
+                            <th className="">Batiment</th>
                             <th className="text-end">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
+                        { parks.map(park=>
                         <tr>
                             <td>
                             <div className="w-100">
@@ -54,26 +76,26 @@ function Parks() {
                             <td>
                             <div className="d-flex justify-content-start flex-column">
                                 <a href="#" className="fw-bold">
-                                Mon premier parc
+                                {park.name ? park.name : '-'} 
                                 </a>
-                                <span className="text-muted">Ajouté le 30/07/22</span>
+                                <span className="text-muted">{park.createdAt ? park.createdAt : '-'} </span>
                             </div>
                             </td>
                             <td>
-                                <a href='#' className='fw-bold'>3 capteurs</a>
+                                <a href='#' className='fw-bold'>{park.Sensors ? park.Sensors.length : '-'} capteurs</a>
                             </td>
                             <td>
                             <div className="d-flex justify-content-start flex-column">
                                 <a href="#" className="fw-bold">
-                                    241 A Grande Rue du Petit Saint Jean
+                                    {park.Buildings ? park.Buildings.name : '-'} 
                                 </a>
-                                <span className="text-muted">Adresse par défaut</span>
+                                <span className="text-muted"> {park.Buildings ? park.Buildings.createdAt : '-'} </span>
                             </div>
                             </td>
                             <td>
                             <div className="d-flex justify-content-end flex-shrink-0">
                                 <Link
-                                to="/parks/1"
+                                to={"/parks/"+park.id}
                                 className="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
                                 >
                                 <span className="svg-icon svg-icon-3">
@@ -97,7 +119,7 @@ function Parks() {
                                 </span>
                                 </ Link>
                                 <Link
-                                to="/sensors/edit"
+                                to={"/parks/edit/"+park.id}
                                 className="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
                                 >
                                 <span className="svg-icon svg-icon-3">
@@ -153,13 +175,15 @@ function Parks() {
                             </div>
                             </td>
                         </tr>
+                        )}
                         </tbody>
                     </table>
                 </div>
             </Card>
             </div>
         </div>
-        </div>
+        </div>:
+    <></>
     )
     }
 

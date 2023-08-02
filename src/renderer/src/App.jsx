@@ -56,7 +56,11 @@ const router = createBrowserRouter([
           {
             path: '/parks/add',
             element: <ParkForm />
-          }
+          },
+          {
+            path: '/parks/edit/:id',
+            element: <ParkForm action="edit" />
+          },
         ]
       },
       {
