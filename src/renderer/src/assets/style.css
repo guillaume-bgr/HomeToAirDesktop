@@ -533,6 +533,7 @@ tr {
 }
 
 .help-widget-button:hover + .help-widget-popup, .help-widget-button:focus + .help-widget-popup {
+    visibility: visible;
     opacity: 1;
 }
 
@@ -543,6 +544,7 @@ tr {
     background-color: var(--home2air-white);
     padding: 8px;
     min-width: 300px;
+    visibility: hidden;
     opacity: 0;
     left: 0;
     top: 30px;
