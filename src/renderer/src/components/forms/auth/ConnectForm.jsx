@@ -30,7 +30,6 @@ export default function ConnectForm() {
     const handleSubmit = async () => {
         fetchApi('POST', {email, password}, '/customers/authenticate')
         .then((response) => {
-            console.log(response);
             context.setRefresh(response.data.refresh);
             context.setUserId(response.data.customer.id);
             context.setToken(response.data.token);
