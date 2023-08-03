@@ -122,6 +122,11 @@ p {
 .link:hover {
     text-decoration: underline;
 }
+
+.hover-primary:hover {
+    color: var(--home2air-primary);
+    cursor: pointer;
+}
  
 /* Scrollbar */
 
@@ -281,7 +286,7 @@ h1.page-title {
 }
 
 .card.headerless .card-header {
-    display: none;
+    display: none !important;
 }
 
 .card .card-header {
@@ -305,6 +310,10 @@ h1.page-title {
 
 .card.sensor .card-header {
     margin-bottom: 0;
+}
+
+.card.sensor .card-content {
+    height: 100%;
 }
 
 .card.sensor h2 {
