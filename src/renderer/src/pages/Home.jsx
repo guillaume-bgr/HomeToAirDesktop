@@ -1,9 +1,11 @@
 import TopBar from "../components/layout/Topbar"
 import Card from "../components/widgets/Card"
-import { useState } from "react"
+import { useState, useEffect, useContext } from "react"
 import PercentageWidget from "../components/widgets/PercentageWidget"
 import SensorList from "../components/widgets/SensorList"
 import HelpWidget from "../components/widgets/HelpWidget"
+import { fetchApi } from "../utils/ApiUtil"
+import { AuthContext } from "../context/AuthContext"
 
 export const Data = [
     {
@@ -17,19 +19,26 @@ export const Data = [
 ];
 
 function Home() {
-    const [chartData, setChartData] = useState({
-        labels: Data.map((data) => data.name), 
-        datasets: [
-            {
-                label: "",
-                data: Data.map((data) => data.percentage),
-                backgroundColor: ["Blue", "transparent"],
-                borderColor: "black",
-                borderWidth: 0,
-                borderRadius: 15
+    const context = useContext(AuthContext)
+    const [customer, setCustomer] = useState({})
+    const [minHumidity, setMinHumidity] = useState()
+    const [maxHumidity, setMaxHumidity] = useState()
+
+    useEffect(() => {
+        const fetchAsync = async () => {
+            try {
+                let customer = await fetchApi('GET', null, '/customers/'+context.userId, context.token);
+                setCustomer(customer);
+                let minAndMax = await fetchApi('GET', null, '/sensors/least-max-polluant?polluant=humidity', context.token)
+                setMinHumidity(minAndMax.min)
+                setMaxHumidity(minAndMax.max)
+                let sensors = await fetchApi('GET', null, '/customers/'+context.userId+'/parks/', context.token)
+                setSensors(sensors);
+            } catch (error) {
             }
-        ]
-    });
+        }
+        fetchAsync();
+    },[])
 
 	return (
         <div className="container">
@@ -44,8 +53,8 @@ function Home() {
                     />
                 </div>
                 <div className="col-12 col-lg-7 mb-4">
-                    <Card title="Bienvenue Jenna Dohn !">
-                        <p>Votre moyenne de taux de pollution est de 12%</p>
+                    <Card title={customer?.first_name ? 'Bienvenue ' + customer?.first_name + ' !' : 'Bienvenue !'}>
+                        <p>Votre AQI moyen est de 12%</p>
                     </Card>
                 </div>
                 <div className="col-12 col-lg-5 mb-4">
@@ -67,11 +76,11 @@ function Home() {
                         <div className="row">
                             <div className="col-6 d-flex flex-column align-items-center">
                                 <p className="text-center mb-3">Humidité la plus importante</p>
-                                <PercentageWidget color={"#c22020"} percentage={80} />
+                                <PercentageWidget color={"#c22020"} percentage={maxHumidity} />
                             </div>
                             <div className="col-6 d-flex flex-column align-items-center">
                                 <p className="text-center mb-3">Humidité la plus faible</p>
-                                <PercentageWidget color={"#0085FF"} percentage={45}  />
+                                <PercentageWidget color={"#0085FF"} percentage={minHumidity}  />
                             </div>
                         </div>
                         <div className="d-flex justify-content-end">

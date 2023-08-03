@@ -8,8 +8,6 @@ import Connect from "./Connect";
 function Template() {
     const context = useContext(AuthContext)
     if (context.token != ""){
-        console.log("token is not null")
-        console.log(context.token)
         return (
             <div className="app">
                 <Sidebar />

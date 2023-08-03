@@ -34,7 +34,7 @@ function Sensors() {
   useEffect(() => {
     const fetchAsync = async () => {
         try {
-            let response = await fetchApi('GET', null, '/customers/'+context.userId+'/sensors/', context.token);
+            let response = await fetchApi('GET', null, '/customers/'+context.userId+'/parks/', context.token);
             setParks(response)
             console.log(response);
             } catch (error) {
@@ -113,24 +113,11 @@ function Sensors() {
                             to={"/sensors/"+sonde.id}
                             className="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
                           >
-                            <span className="svg-icon svg-icon-3">
-                              <svg
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z"
-                                  fill="currentColor"
-                                ></path>
-                                <path
-                                  opacity="0.3"
-                                  d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z"
-                                  fill="currentColor"
-                                ></path>
-                              </svg>
+                            <span class="svg-icon ">
+                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21.7 18.9L18.6 15.8C17.9 16.9 16.9 17.9 15.8 18.6L18.9 21.7C19.3 22.1 19.9 22.1 20.3 21.7L21.7 20.3C22.1 19.9 22.1 19.3 21.7 18.9Z" fill="currentColor"/>
+                            <path opacity="0.3" d="M11 20C6 20 2 16 2 11C2 6 6 2 11 2C16 2 20 6 20 11C20 16 16 20 11 20ZM11 4C7.1 4 4 7.1 4 11C4 14.9 7.1 18 11 18C14.9 18 18 14.9 18 11C18 7.1 14.9 4 11 4ZM8 11C8 9.3 9.3 8 11 8C11.6 8 12 7.6 12 7C12 6.4 11.6 6 11 6C8.2 6 6 8.2 6 11C6 11.6 6.4 12 7 12C7.6 12 8 11.6 8 11Z" fill="currentColor"/>
+                            </svg>
                             </span>
                           </ Link>
                           <Link

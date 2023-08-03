@@ -122,6 +122,11 @@ p {
 .link:hover {
     text-decoration: underline;
 }
+
+.hover-primary:hover {
+    color: var(--home2air-primary);
+    cursor: pointer;
+}
  
 /* Scrollbar */
 
@@ -281,7 +286,7 @@ h1.page-title {
 }
 
 .card.headerless .card-header {
-    display: none;
+    display: none !important;
 }
 
 .card .card-header {
@@ -305,6 +310,10 @@ h1.page-title {
 
 .card.sensor .card-header {
     margin-bottom: 0;
+}
+
+.card.sensor .card-content {
+    height: 100%;
 }
 
 .card.sensor h2 {
@@ -533,6 +542,7 @@ tr {
 }
 
 .help-widget-button:hover + .help-widget-popup, .help-widget-button:focus + .help-widget-popup {
+    visibility: visible;
     opacity: 1;
 }
 
@@ -543,6 +553,7 @@ tr {
     background-color: var(--home2air-white);
     padding: 8px;
     min-width: 300px;
+    visibility: hidden;
     opacity: 0;
     left: 0;
     top: 30px;
@@ -602,12 +613,12 @@ tr {
 }
 
 .toolbar .toolbar-buttons {
-    outline: none;
     display: flex;
     -webkit-app-region: no-drag
 }
 
 .toolbar .toolbar-buttons button {
+    outline: none;
     display: flex;
     align-items: center;
     background-color: transparent;
