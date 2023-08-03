@@ -602,12 +602,12 @@ tr {
 }
 
 .toolbar .toolbar-buttons {
-    outline: none;
     display: flex;
     -webkit-app-region: no-drag
 }
 
 .toolbar .toolbar-buttons button {
+    outline: none;
     display: flex;
     align-items: center;
     background-color: transparent;
