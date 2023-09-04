@@ -1,7 +1,6 @@
 import TopBar from '../../components/layout/Topbar'
 import Card from '../../components/widgets/Card'
-import Gauge from '../../components/widgets/Gauge'
-import { ValidationAlert, SimpleAlert } from '../../utils/PopupUtils'
+import { ValidationAlert, TimerAlert} from '../../utils/PopupUtils'
 import { Link } from 'react-router-dom'
 import { fetchApi } from '../../utils/ApiUtil'
 import { useEffect, useContext, useState } from 'react'
@@ -17,7 +16,6 @@ function Parks() {
             try {
                 let response = await fetchApi('GET', null, '/customers/'+context.userId+'/sensors/', context.token);
                 setParks(response)
-                console.log(response);
                 } catch (error) {
                 console.log(error);
             }
@@ -26,9 +24,20 @@ function Parks() {
     },[reload])
     
 
-    const deleteItem = () => {
-        ValidationAlert('Êtes-vous sûr de vouloir supprimer cet élément ?')
-    } 
+    const deleteItem = (id) => {
+        ValidationAlert('Êtes-vous sûr de vouloir supprimer cet élément ?', deleteParks, id)
+      }
+
+      const deleteParks = async (id) => {
+        try {
+          let response = await fetchApi('DELETE', null, '/parks/'+id, context.token);
+          TimerAlert('Park suprimé', 'success')
+          setReload(!reload)
+          } catch (error) {
+          console.log(error);
+          TimerAlert(error.message, 'error')
+      }
+      }
 
     return (
         parks ?
@@ -145,7 +154,7 @@ function Parks() {
                                 <Link
                                 to="javascript:void(0)"
                                 className="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
-                                onClick={() => deleteItem()}
+                                onClick={() => deleteItem(park.id)}
                                 >
                                 <span className="svg-icon svg-icon-3">
                                     <svg

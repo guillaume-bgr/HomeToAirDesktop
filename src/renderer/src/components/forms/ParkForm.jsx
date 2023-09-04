@@ -10,8 +10,10 @@ import { TimerAlert } from "../../utils/PopupUtils";
 
 function ParkForm(props) {
     const [parks, setParks] = useState(0);
+    const [park, setPark] = useState(0);
     const [name, setName] = useState(0);
     const [selectedBuilding, setSelectedBuilding] = useState(0);
+    const [selectedSensors, setSelectedSensors] = useState([]);
     const [buildingsData, setBuildingsData] = useState(0);
     const [sensorsData, setSensorsData] = useState(0);
     const context = useContext(AuthContext)
@@ -23,6 +25,7 @@ function ParkForm(props) {
             try {
                 let response = await fetchApi('GET', null, '/customers/'+context.userId+'/sensors/', context.token);
                 setParks(response)
+                console.log(response)
                 let buildingsData= []
                 let sensorsData= []
                 for (let park in response) {
@@ -46,14 +49,35 @@ function ParkForm(props) {
         fetchAsync();
     },[])
 
+    useEffect(() => {
+        const getEditedPark = async () => {
+            if (props.action == 'edit'){
+                try {
+                    let response = await fetchApi('GET', null, '/parks/'+ id, context.token);
+                    setPark(response.data);
+                    setName(response.data.name);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+        }
+        getEditedPark();
+    },[])
+
 
     const sendToApi = async () => {
         let parkName = escapeHtml(name)
         if (props.action == 'edit'){
-            fetchApi('PATCH', {name: parkName,  building_id : selectedBuilding.id}, '/park/'+id)
+            if (selectedSensors != []){
+                var sensors_id = []
+                for (let sensor in selectedSensors){
+                    sensors_id.push(selectedSensors[sensor].value)
+                }
+            }
+            fetchApi('PATCH', {name: parkName,  building_id : selectedBuilding.value, sensors : JSON.stringify(sensors_id)}, '/parks/'+id, context.token)
             .then((response) => {
                 if (response.statusCode == 200) {
-                    TimerAlert('Sondes mise à jour !', 'success')
+                    TimerAlert('Parc mis à jour !', 'success')
                 }
             }).catch((error)=>{
                 console.log("Api call error");
@@ -64,8 +88,7 @@ function ParkForm(props) {
             let user = await fetchApi('GET', null, '/customers/'+context.userId, context.token);
             fetchApi('POST', { name: parkName,  building_id : selectedBuilding.id, company_id: user.Companies.id}, '/parks/create', context.token)
         .then((response) => {
-			console.log(response);
-            TimerAlert('Park mis à jour !', 'success')
+            TimerAlert('Parc ajouté !', 'success')
 			}).catch((error)=>{
 				console.log("Api call error Create Park")
 				console.log(error.message)
@@ -79,10 +102,11 @@ function ParkForm(props) {
     let formOptions = {
         pageTitle: 'Ajouter un parc',
         data: {
-            name: props.park?.name,
-            park: props.park?.Building,
-            sensors: props.park?.Sensors
+            name: park?.name,
+            building: park?.Buildings,
+            sensors: park?.Sensors?.id
         }
+        
     }
 
     if (props.action == 'edit') {
@@ -104,13 +128,13 @@ function ParkForm(props) {
                 <div className="col-12">
                     <Card title={formOptions.pageTitle}>
                         <form method="POST" className="py-2">
-                            <input type="text" name="name" value={formOptions.data.name} className="form-input-solid shadow-none mb-3" placeholder="Nom du parc" onChange={e => setName(e.target.value)}/>
+                            <input type="text" name="name" defaultValue={formOptions.data.name} className="form-input-solid shadow-none mb-3" placeholder="Nom du parc" onChange={e => setName(e.target.value)}/>
                             <NiceSelect name="address" placeholder={"Choisir un batiment"} className="mb-3" options={
                                 buildingsData
-                            } setSelected = {setSelectedBuilding} />
-                            <NiceSelect name="sensors" placeholder={"Choisir un capteur"} className="mb-3" options={
+                            } setSelected = {setSelectedBuilding} defaultValue={buildingsData[park?.Buildings?.id-1]} />
+                            <NiceSelect name="sensors" isMulti={true} placeholder={"Choisir un / des capteur(s)"} className="mb-3" options={
                                 sensorsData
-                            } />
+                            } defaultValue={park?.Sensors} setSelected = {setSelectedSensors} />
                             <button type="button" className="btn btn-primary" onClick={() => sendToApi()}>Ajouter</button>
                         </form>
                     </Card>
