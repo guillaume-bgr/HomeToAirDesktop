@@ -77,8 +77,7 @@ function Sensors() {
                 </thead>
                 <tbody>
                   { parks.map(park=> park.Sensors.map(sonde=>
-                    <>
-                      <tr>
+                      <tr key={sonde.id}>
                       <td>
                         <div className="w-100">
                           <input
@@ -179,7 +178,7 @@ function Sensors() {
                         </div>
                       </td>
                     </tr>
-                  </>))}
+                  ))}
                 </tbody>
               </table>
             </div>
