@@ -14,6 +14,7 @@ function ShowSensor() {
     const [sonde, setSonde] = useState(0);
     const [park, setPark] = useState(0);
     const [building, setBuilding] = useState(0);
+    const [indexes, setIndexes] = useState(0);
     
     useEffect(() => {
         const fetchAsync = async () => {
@@ -26,8 +27,8 @@ function ShowSensor() {
                 let building = await fetchApi('GET', null, '/buildings/'+park.data.building_id, context.token);
                 setBuilding(building.data)
                 let sensorHistory = await fetchApi('GET', null, '/sensors/sensor-history/'+sensor.data.id);
-                console.log(sensorHistory);
-
+                let aqiResponse = await fetchApi('POST', {sensorHistory: JSON.stringify(sensorHistory.data)}, '/sensors/aqi');
+                setIndexes(aqiResponse);
                 } catch (error) {
                 console.log(error);
             }
@@ -54,7 +55,7 @@ function ShowSensor() {
                         <div className='row'>
                             <div className='col-8 d-flex'>
                                 <div className='border-right p-2 w-fit-content bg-body'>
-                                    <AqiChart AQI={30}/>
+                                    <AqiChart AQI={indexes.globalAQI}/>
                                 </div>
                                 <div className="ps-2">
                                     <div className='me-2'>
@@ -105,22 +106,22 @@ function ShowSensor() {
                     <Card title="Données des 12 dernières heures">
                         <div className='row'>
                             <div className='col-6'>
-                                <SensorDataChart id={id} label="Oxydes d'azote" pollutant="oxydants" color="#7400b8"  />
+                                <SensorDataChart id={id} label="Oxydes d'azote" pollutant="oxydants" color="#7400b8" aqi={indexes.AQIs?.oxydants} unit="ppm"/>
                             </div>
                             <div className='col-6'>
-                                <SensorDataChart id={id} label="Monoxyde de carbone" pollutant="reducers" color="#80ffdb" unit="ppm"/>
+                                <SensorDataChart id={id} label="Monoxyde de carbone" pollutant="reducers" color="#80ffdb" aqi={indexes.AQIs?.reducers} unit="ppm"/>
+                            </div>
+                            <div className='col-6'>
+                                <SensorDataChart id={id} label="Particule PM1" pollutant="pm2_5" color="#4ea8de" aqi={indexes.AQIs?.pm2_5} unit="ppm"/>
+                            </div>
+                            <div className='col-6'>
+                                <SensorDataChart id={id} label="Particules PM10" pollutant="pm10" color="#5390d9" aqi={indexes.AQIs?.pm10} unit="ppm"/>
                             </div>
                             <div className='col-6'>
                                 <SensorDataChart id={id} label="Ammoniac" pollutant="nh3" color="#5e60ce" unit="ppm"/>
                             </div>
                             <div className='col-6'>
                                 <SensorDataChart id={id} label="Humidité" pollutant="humidity" color="#64dfdf" unit="%"/>
-                            </div>
-                            <div className='col-6'>
-                                <SensorDataChart id={id} label="Particule PM1" pollutant="pm1" color="#4ea8de" unit="ppm"/>
-                            </div>
-                            <div className='col-6'>
-                                <SensorDataChart id={id} label="Particules PM10" pollutant="pm10" color="#5390d9" unit="ppm"/>
                             </div>
                         </div>
                     </Card>

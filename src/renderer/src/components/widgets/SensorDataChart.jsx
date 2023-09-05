@@ -67,7 +67,12 @@
 
 	return (
 		<>
-			<p className='sensor-chart-title'>{props.label}</p>
+			<div className='d-flex justify-content-between'>
+				<p className='sensor-chart-title'>{props.label}</p>
+				{props.aqi ? 
+				<p className=''>AQI: <span className='fw-bold'>{props.aqi}</span></p>
+				: null}
+			</div>
 			<div className="lineChart d-flex flex-row justify-content-center align-items-center pb-4">
 			<Line data={data} options={options} />
 			</div>
