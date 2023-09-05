@@ -16,9 +16,8 @@
 	useEffect(() => {
         const fetchAsync = async () => {
             try {
-                let response = await fetchApi('GET', null, '/sensors/sensor-history/'+ props.id, context.token);
-                console.log(response);
-                setSensorHistory(response.data);
+                let response = await fetchApi('GET', null, '/sensors/'+ props.id +'/data-over-time?time=12', context.token);
+                setSensorHistory(response);
                 } catch (error) {
                 console.log(error);
             }

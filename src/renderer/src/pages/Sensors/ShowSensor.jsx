@@ -21,12 +21,13 @@ function ShowSensor() {
                 let sensor = await fetchApi('GET', null, '/sensors/'+id, context.token);
                 setSonde(sensor.data)
                 let park = await fetchApi('GET', null, '/parks/'+sensor.data.parks_id, context.token);
+                console.log(park);
                 setPark(park.data)
                 let building = await fetchApi('GET', null, '/buildings/'+park.data.building_id, context.token);
                 setBuilding(building.data)
-                console.log(building)
-                console.log(park.data)
-                console.log(sensor)
+                let sensorHistory = await fetchApi('GET', null, '/sensors/sensor-history/'+sensor.data.id);
+                console.log(sensorHistory);
+
                 } catch (error) {
                 console.log(error);
             }
