@@ -11,7 +11,13 @@ function SensorList() {
     useEffect(() => {
         const fetchAsync = async () => {
             try {
-                let sensors = await fetchApi('GET', null, '/customers/'+context.userId+'/parks/', context.token)
+                let response = await fetchApi('GET', null, '/customers/'+context.userId+'/parks/', context.token);
+                let sensors = [];
+                for (let park of response) {
+                    for (let sensor of park.Sensors) {
+                        sensors.push(sensor);
+                    }
+                }
                 setSensors(sensors);
             } catch (error) {
             }
@@ -22,7 +28,7 @@ function SensorList() {
     return (
         <div className="sensor-list">
             <div className="row">
-                { sensors.map(sensor=>  
+                { sensors.slice(0, 3).map(sensor=>  
                     <div className="col-4" key={sensor.id}>
                         <Card className="sensor">
                             <div className="row">
