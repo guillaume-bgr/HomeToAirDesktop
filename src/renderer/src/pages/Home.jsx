@@ -32,8 +32,6 @@ function Home() {
                 let minAndMax = await fetchApi('GET', null, '/sensors/least-max-polluant?polluant=humidity', context.token)
                 setMinHumidity(minAndMax.min)
                 setMaxHumidity(minAndMax.max)
-                let sensors = await fetchApi('GET', null, '/customers/'+context.userId+'/parks/', context.token)
-                setSensors(sensors);
             } catch (error) {
             }
         }
