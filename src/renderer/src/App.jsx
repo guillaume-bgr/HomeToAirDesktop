@@ -11,6 +11,9 @@ import Profile from './pages/Profile/Profile'
 import { AuthContext } from './context/AuthContext'
 import { useState } from 'react'
 import Toolbar from './Toolbar'
+import Companies from './pages/Companies/Companies'
+import ShowUsersCompanies from './pages/Companies/ShowUsersCopanies'
+import CompaniesForm from './components/forms/CompaniesForm'
 
 const router = createBrowserRouter([
   {
@@ -66,6 +69,27 @@ const router = createBrowserRouter([
             index: true,
             element: <Profile />
           }
+        ]
+      },
+      {
+        path: '/companies',
+        children: [
+          {
+            index: true,
+            element: <Companies />
+          },
+          {
+            path: '/companies/:id',
+            element: <ShowUsersCompanies />
+          },
+          {
+            path: '/companies/edit/:id',
+            element: <CompaniesForm action="edit"/>
+          },
+          {
+            path: '/companies/add',
+            element: <CompaniesForm/>
+          },
         ]
       }
     ]
