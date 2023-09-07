@@ -92,7 +92,7 @@ function Sensors() {
                           <a href="#" className="fw-bold">
                             {sonde.name ? sonde.name : '-'}
                           </a>
-                          <span className="text-muted"> {sonde.createdAt ? sonde.createdAt : '-'}</span>
+                          <span className="text-muted"> {sonde.createdAt ? new Date(sonde.createdAt).toLocaleString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'}) : '-'}</span>
                         </div>
                       </td>
                       <td>
