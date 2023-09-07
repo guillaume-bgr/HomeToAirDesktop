@@ -88,7 +88,7 @@ function Home() {
                 </div>
                 <div className="col-12 col-lg-7 mb-4">
                     <Card title={customer?.first_name ? 'Bienvenue ' + customer?.first_name + ' !' : 'Bienvenue !'}>
-                        <p>Votre AQI moyen est de 12%</p>
+                        <p>Votre AQI moyen est de 12</p>
                     </Card>
                 </div>
                 <div className="col-12 col-lg-5 mb-4">
