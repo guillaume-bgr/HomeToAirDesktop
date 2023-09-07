@@ -1,5 +1,5 @@
 import { env } from "../env/env.dev";
-export async function fetchApi( method, params, route, token = null ) {
+export async function fetchApi( method, params, route, token = null, customRoute = false ) {
     const options = {
         method: method,
         headers: {
@@ -13,7 +13,7 @@ export async function fetchApi( method, params, route, token = null ) {
         options.headers['Authorization'] = 'Bearer '+token;
     }
     try {
-        const response = await fetch(env.API_URL+':'+env.API_PORT+route, options);
+        const response = await fetch(customRoute ? route : env.API_URL+':'+env.API_PORT+route, options);
         let json = await response.json();
         json.statusCode = response.status;
         return json;
