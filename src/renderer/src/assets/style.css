@@ -548,6 +548,7 @@ tr {
 }
 
 .help-widget-popup {
+    box-shadow: 0px 0px 15px 2px #8d8d8d8c;
     transition: opacity 0.1s ease-in-out;
     position: absolute;
     z-index: 1000;
