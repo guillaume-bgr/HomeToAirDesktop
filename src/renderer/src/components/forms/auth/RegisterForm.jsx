@@ -57,30 +57,40 @@ export default function RegisterForm() {
     }
 	return (
         <form>
-            <div className="d-flex mt-4 w-100 justify-content-around">
-                <div className="form-floating">
-                    <input type="text" className="form-control " id="floatingInput" placeholder="Nom" onChange={e => setLastname(e.target.value)}/>
-                    <label htmlFor="floatingInput">Nom</label>
+            <div className="row mx-5 pt-4">
+                <div className="col-6">
+                    <div className="form-floating">
+                        <input type="text" className="form-control form-input-solid" placeholder="Nom" id="floatingInput" onChange={e => setLastname(e.target.value)}/>
+                        <label htmlFor="floatingInput">Nom</label>
+                    </div>
                 </div>
-                <div className="form-floating">
-                    <input type="text" className="form-control " id="floatingInput" placeholder="Prénom" onChange={e => setFirstname(e.target.value)}/>
-                    <label htmlFor="floatingInput">Prénom</label>
+                <div className="col-6">
+                    <div className="form-floating">
+                        <input type="text" className="form-control form-input-solid" placeholder="Prénom" id="floatingInput" onChange={e => setFirstname(e.target.value)}/>
+                        <label htmlFor="floatingInput">Prénom</label>
+                    </div>
                 </div>
-            </div>
-            <div className="form-floating mx-5 my-4">
-                <input type="email" className="form-control " id="floatingInput"placeholder="name@exemple.com"  onChange={e => setEmail(e.target.value)}/>
-                <label htmlFor="floatingInput">Adresse mail</label>
-            </div>
-            <div className="form-floating mx-5 my-4">
-                <input type="password" className="form-control connect-input" placeholder="Mot de passe" id="floatingPassword" onChange={e => setPassword(e.target.value)}/>
-                <label htmlFor="floatingPassword">Mot de passe</label>
-            </div>
-            <div className="form-floating mx-5 my-4">
-                <input type="password" className="form-control connect-input" placeholder="Confirmer le mot de passe" id="floatingPassword" onChange={e => setRepeatPassword(e.target.value)}/>
-                <label htmlFor="floatingPassword">Confirmer le mot de passe</label>
-            </div>
-            <div className="w-100 d-flex justify-content-center">
-                <button type="button" className="btn btn-primary mx-auto mb-3" onClick={() => verifyForm()}>Inscription</button>
+                <div className="col-12 mt-4">
+                    <div className="form-floating">
+                        <input type="email" className="form-control form-input-solid" id="floatingInput" onChange={e => setEmail(e.target.value)}/>
+                        <label htmlFor="floatingInput">Adresse mail</label>
+                    </div>
+                </div>
+                <div className="col-12 mt-4">
+                    <div className="form-floating">
+                        <input type="password" className="form-control connect-input" placeholder="name@exemple.com" id="floatingPassword" onChange={e => setPassword(e.target.value)}/>
+                        <label htmlFor="floatingPassword">Mot de passe</label>
+                    </div>
+                </div>
+                <div className="col-12 mt-4">
+                    <div className="form-floating">
+                        <input type="password" className="form-control connect-input" placeholder="Mot de passe" id="floatingPassword" onChange={e => setRepeatPassword(e.target.value)}/>
+                        <label htmlFor="floatingPassword">Confirmer le mot de passe</label>
+                    </div>
+                </div>
+                <div className="w-100 d-flex justify-content-center mt-4">
+                    <button type="button" className="btn btn-primary mx-auto mb-3" onClick={() => verifyForm()}>Inscription</button>
+                </div>
             </div>
         </form>
 	);

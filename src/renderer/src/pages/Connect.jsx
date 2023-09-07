@@ -8,7 +8,7 @@ export default function Connect() {
             <div className="container w-25 p-5 mt-5 rounded-3">
                 <img className="img-fluid m-auto" src={logo} alt="Logo" />
             </div>
-            <div className="container p-2 rounded-3 bg-dark card-width">
+            <div className="connect-page container p-2 card-width">
             <ul className="nav nav-tabs" id="myTab" role="tablist">
                     <li className="nav-item" role="presentation">
                         <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Connexion</button>

@@ -41,16 +41,18 @@ export default function ConnectForm() {
     }
 	return (
         <form>
-            <div className="form-floating m-5 ">
-                <input type="email" defaultValue="cecilia.ruin@gmail.com" className="form-control " id="floatingInput" onChange={e => setEmail(e.target.value)} placeholder="name@exemple.com"/>
-                <label htmlFor="floatingInput">Adresse mail</label>
-            </div>
-            <div className="form-floating m-5">
-                <input type="password" defaultValue="Mot2P@sse" className="form-control connect-input" id="floatingPassword" onChange={e => setPassword(e.target.value)} placeholder="mot de passe"/>
-                <label htmlFor="floatingPassword">Mot de passe</label>
-            </div>
-            <div className="w-100 d-flex justify-content-center">
-                <button type="button" className="btn btn-primary mx-auto mb-3" onClick={verifyForm}>Connexion</button>
+            <div className="row mx-5">
+                <div className="form-floating col-12 mt-4">
+                    <input type="email" defaultValue="GuillaumeBongrand1@gmail.com" className="form-control form-input-solid" id="floatingInput" onChange={e => setEmail(e.target.value)} placeholder="name@exemple.com"/>
+                    <label htmlFor="floatingInput" className="ms-2">Adresse mail</label>
+                </div>
+                <div className="form-floating col-12 mt-4">
+                    <input type="password" defaultValue="Password2k1!" className="form-control connect-input" id="floatingPassword" onChange={e => setPassword(e.target.value)} placeholder="mot de passe"/>
+                    <label htmlFor="floatingPassword" className="ms-2">Mot de passe</label>
+                </div>
+                <div className="w-100 d-flex justify-content-center mt-4">
+                    <button type="button" className="btn btn-primary mx-auto mb-3" onClick={verifyForm}>Connexion</button>
+                </div>
             </div>
         </form>
 	);
