@@ -14,7 +14,6 @@ function Sensors() {
   const [parks, setParks] = useState(0);
   const [reload, setReload] = useState(false);
   const deleteItem = (id) => {
-    setDeleteId(id)
     ValidationAlert('Êtes-vous sûr de vouloir supprimer cet élément ?', deleteSensors, id)
   }
 

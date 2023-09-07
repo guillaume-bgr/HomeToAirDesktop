@@ -23,7 +23,7 @@ function ParkForm(props) {
     useEffect(() => {
         const fetchAsync = async () => {
             try {
-                let response = await fetchApi('GET', null, '/customers/'+context.userId+'/sensors/', context.token);
+                let response = await fetchApi('GET', null, '/customers/'+context.userId+'/parks/', context.token);
                 setParks(response)
                 console.log(response)
                 let buildingsData= []
