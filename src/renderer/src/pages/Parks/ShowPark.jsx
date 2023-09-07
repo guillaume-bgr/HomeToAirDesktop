@@ -7,16 +7,35 @@ import PercentageWidget from '../../components/widgets/PercentageWidget';
 import { Link } from 'react-router-dom'
 import Gauge from '../../components/widgets/Gauge';
 import { ValidationAlert } from '../../utils/PopupUtils';
+import { useContext, useEffect, useState } from 'react';
+import { fetchApi } from '../../utils/ApiUtil';
+import { AuthContext } from '../../context/AuthContext';
 
 function ShowPark() {
     // Sensor ID
+    const context = useContext(AuthContext)
     let { id } = useParams();
+    const [park, setPark] = useState(0);
 
     const deleteItem = () => {
         ValidationAlert('Êtes-vous sûr de vouloir supprimer cet élément ?')
     } 
 
+    useEffect(() => {
+        const fetchAsync = async () => {
+            try {
+                let park = await fetchApi('GET', null, '/parks/'+id, context.token);
+                setPark(park.data)
+                console.log(park.data)
+                } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchAsync();
+    },[])
+
     return (
+        park ?
         <div className='show-sensor container'>
             <div className='row'>
                 <div className='col-12'>
@@ -40,7 +59,7 @@ function ShowPark() {
                                 <div className="ps-2">
                                     <div className='me-2'>
                                         <div className='d-flex align-items-baseline'>
-                                            <span className='h5 mb-0'>Mon parc</span>
+                                            <span className='h5 mb-0'>{park.name ? park.name : '-'}</span>
                                             <div className='status ms-2'>
                                                 <span className='me-1 text-success'>En ligne</span>
                                                 <span className="text-success vertical-align-top">
@@ -51,7 +70,7 @@ function ShowPark() {
                                                 </span>
                                             </div>
                                         </div>
-                                        <p className='text-muted text-sm'>Ajouté le 21/09/22</p>
+                                        <p className='text-muted text-sm'>{park.createdAt ? park.createdAt : '-'}</p>
                                         <div className="description text-muted mt-2 d-flex">
                                             <div className='me-3'>
                                                 <span className="me-2"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -59,7 +78,7 @@ function ShowPark() {
                                                 <path d="M12.0624 13.0453C13.7193 13.0453 15.0624 11.7022 15.0624 10.0453C15.0624 8.38849 13.7193 7.04535 12.0624 7.04535C10.4056 7.04535 9.06241 8.38849 9.06241 10.0453C9.06241 11.7022 10.4056 13.0453 12.0624 13.0453Z" fill="currentColor"/>
                                                 </svg>
                                                 </span>
-                                                <span>Immeuble Amiens Henriville</span>
+                                                <span>{park.Buildings ? park.Buildings.name  : '-'}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -74,7 +93,7 @@ function ShowPark() {
                         </div>
                     </Card>
                 </div>
-                <div className='col-3 mt-4'>
+                {/* <div className='col-3 mt-4'>
                     <Card title="Humidité moyenne des capteurs" subtitle="12 dernières heures">
                         <div className='d-flex justify-content-center mt-2'>
                             <PercentageWidget percentage={50} color={'#0085FF'}/>
@@ -85,7 +104,7 @@ function ShowPark() {
                     <Card title="Evolution du taux de CO" subtitle="12 dernières heures">
                         <SensorDataChart label="Monoxyde de carbone" pollutant="reducers" color="#80ffdb" unit="ppm" />
                     </Card>
-                </div>
+                </div> */}
                 <div className='col-12 my-4'>
                     <Card title="Capteurs du parc">
                         <div className="table-responsive">
@@ -104,6 +123,7 @@ function ShowPark() {
                             </tr>
                             </thead>
                             <tbody>
+                            { park.Sensors.map(sensor=>
                             <tr>
                                 <td>
                                 <div className="w-100">
@@ -117,9 +137,9 @@ function ShowPark() {
                                 <td>
                                 <div className="d-flex justify-content-start flex-column">
                                     <a href="#" className="fw-bold">
-                                    Mon premier capteur
+                                    {sensor.name?sensor.name: '-'}
                                     </a>
-                                    <span className="text-muted">Ajouté le 24/05/22</span>
+                                    <span className="text-muted">{sensor.name?sensor.createdAt: '-'}</span>
                                 </div>
                                 </td>
                                 <td>
@@ -128,9 +148,9 @@ function ShowPark() {
                                 <td>
                                 <div className="d-flex justify-content-start flex-column">
                                     <a href="#" className="fw-bold">
-                                    Mon premier parc
+                                    {park.name?park.name: '-'}
                                     </a>
-                                    <span className="text-muted">Parc par défaut</span>
+                                    <span className="text-muted">{park.Sensors.lenght?park.Sensors.lenght: '-'}</span>
                                 </div>
                                 </td>
                                 <td>
@@ -192,13 +212,15 @@ function ShowPark() {
                                 </div>
                                 </td>
                             </tr>
+                            )}
                             </tbody>
                         </table>
                         </div>
                     </Card>
                 </div>
             </div>
-        </div>
+        </div>:
+        <></>
     )
 }
 
