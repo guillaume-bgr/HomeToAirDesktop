@@ -5,6 +5,7 @@ import PercentageWidget from "../components/widgets/PercentageWidget"
 import SensorList from "../components/widgets/SensorList"
 import HelpWidget from "../components/widgets/HelpWidget"
 import AqiChart from "../components/widgets/AqiChart"
+import AqiBarChart from "../components/widgets/AqiBarChart"
 import { fetchApi } from "../utils/ApiUtil"
 import { AuthContext } from "../context/AuthContext"
 import loadingIcon from './../assets/img/loading.svg'
@@ -123,7 +124,7 @@ function Home() {
                 <div className="col-12 mb-4">
                     <SensorList />
                 </div>
-                <div className="col-12 col-md-6 col-lg-3 mb-4">
+                <div className="col-12 col-md-6 col-lg-3">
                     <Card 
                     title={<div className="d-flex align-items-center"><p>{weather ? weather.location.name + " - " : null}</p><img className="weather-icon" src={weather?.current?.condition?.icon}></img></div>} 
                     subtitle={"le "+String(date.getDate()).padStart(2, '0') + '/' + String(date.getMonth() + 1).padStart(2, '0') + '/' + date.getFullYear()}
@@ -138,17 +139,43 @@ function Home() {
                                     <p>PM2,5: <span className="fw-bold">15.9</span></p>
                                     <p>PM10: <span className="fw-bold">17.2</span></p>
                                 </div>
-                                <div className="weather">
-                                    
-                                </div>
-                                
                             </>
                             :
                             <div className="d-flex justify-content-center"><img className="w-50" src={loadingIcon} alt="Logo" /></div>}
                         </div>
                     </Card>
                 </div>
-                <div></div>
+                <div className="col-12 col-md-6 col-xl-9">
+                    <Card title="Vos AQI des douze dernières heures"
+                    helper={
+                        <HelpWidget modalDirection="left" width={400}>
+                            <p className="pb-1">
+                            L'Indice de Qualité de l'Air (AQI) est un système de mesure qui évalue la pollution de l'air dans une région donnée. Il fournit une valeur numérique pour informer le public sur la qualité de l'air en fonction de divers polluants atmosphériques.
+                            </p>
+                            <p className="pb-1">
+                                0-50 : <span style={{color: '#2ecc3b'}}>Bon</span>
+                            </p>
+                            <p className="pb-1">
+                                51-100 :  <span style={{color: '#ebdb4b'}}>Modéré</span> 
+                            </p>
+                            <p className="pb-1">
+                                101-150 : <span style={{color: '#ff7e00'}}>Mauvais pour les groupes sensibles</span>
+                            </p>
+                            <p className="pb-1">
+                                151-200 : <span style={{color: '#c22020'}}>Mauvais</span>
+                            </p>
+                            <p className="pb-1">
+                                201-300 : <span style={{color: '#8f3f97'}}>Très mauvais</span>
+                            </p>
+                            <p className="pb-1">
+                            301 et plus : <span style={{color: '#7e0023'}}>Dangereux</span>
+                            </p>
+                        </HelpWidget>   
+                    }
+                    >
+                        <AqiBarChart></AqiBarChart>
+                    </Card>
+                </div>
             </div>
         </div>
 	);
