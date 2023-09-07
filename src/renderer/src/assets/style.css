@@ -19,6 +19,7 @@
     --bs-link-color-rgb: #0085FF;
     --home2air-white: #ffffff;
     --home2air-black: #000000;
+    --home2air-form-dark: #3c3f46;
 }
 
 * {
@@ -636,22 +637,68 @@ tr {
 
 /*Connect Page */
 
+.connect-page {
+    background-color: var(--home2air-dark);
+    border-radius: 8px;
+}
+
 .card-width{
     width: 40%;
 }
 .connect-input{
-    background-color: var(--home2air-form-bg);
+    background-color: var(--home2air-form-dark);
     border: none;
 }
+
+.connect-page input, .connect-page input:focus {
+    background-color: var(--home2air-form-dark);
+    color: white;
+}
+
+.form-floating>.form-control:focus~label::after {
+    background-color: var(--home2air-form-dark) !important;
+    color: white;
+}
+
 .connect-input::placeholder {
     color: var(--home2air-muted);   
 }
-.nav-link{
-    color:var(--home2air-form-bg)
+
+.connect-page .nav-link {
+    border-radius: 0;
 }
-.nav-link.active{
-    color: var(--home2air-dark);
+
+.connect-page .nav-tabs .nav-link {
+    background-color: var(--home2air-dark);
+    color: #ffffff;
 }
-.nav-link:hover{
-    color: var(--home2air-form-bg);
+
+.connect-page .nav-link:not([aria-selected=true]):hover {
+    color: var(--home2air-primary);
+    border-color: transparent;
 }
+
+.connect-page .nav-link[aria-selected=true] {
+    border-color: var(--home2air-primary);
+    background-color: var(--home2air-form-dark);
+}
+
+.connect-page .nav-tabs {
+    border-bottom: 0px;
+}
+
+input {
+    border-radius: 0 !important;
+}
+
+label[for=floatingInput], label[for=floatingPassword] {
+    color: white !important;
+}
+
+.form-floating>.form-control-plaintext~label::after, .form-floating>.form-control:not(:placeholder-shown)~label::after, .form-floating>.form-select~label::after {
+    background-color: var(--home2air-form-dark) !important;
+    color: white;
+}
+
+
+
