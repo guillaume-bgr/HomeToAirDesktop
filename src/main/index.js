@@ -4,6 +4,7 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
 let mainWindow = null
+process.env.GOOGLE_API_KEY = 'AIzaSyC1gab3N9RItiiMQ795ftr-2eLE3zLDafU'
 
 function createWindow() {
   // Create the browser window.

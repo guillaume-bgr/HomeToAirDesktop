@@ -66,6 +66,14 @@ p {
     margin-bottom: 0;
 }
 
+.weather-icon {
+    height: 1.5em;
+}
+
+.fs-small {
+    font-size: 0.75em;
+}
+
 .border-right {
     border-right: 1px dashed var(--home2air-grey);
 }
@@ -701,5 +709,14 @@ label[for=floatingInput], label[for=floatingPassword] {
     color: white;
 }
 
+/* Card button */ 
 
+.card-button {
+    background-color: var(--home2air-white);
+    border: none;
+}
 
+.card-button:hover {
+    background-color: var(--home2air-primary);
+    color: white;
+}

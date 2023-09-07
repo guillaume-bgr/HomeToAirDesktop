@@ -9,7 +9,7 @@ function HelpWidget(props) {
                 </svg>
                 </span>
             </span>
-            <div className={"help-widget-popup " + props.modalDirection}>
+            <div className={"help-widget-popup shadow " + props.modalDirection} style={{width: props.width}}>
                 {props.children}
             </div>
         </div>
