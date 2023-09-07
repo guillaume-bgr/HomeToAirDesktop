@@ -26,8 +26,8 @@ function SensorList() {
     },[])
 
     return (
-        <div className="sensor-list">
-            <div className="row">
+        <div className="sensor-list d-flex">
+            <div className="row" style={{width: '90%', marginRight: '0'}}>
                 { sensors.slice(0, 3).map(sensor=>  
                     <div className="col-4" key={sensor.id}>
                         <Card className="sensor">
@@ -64,8 +64,8 @@ function SensorList() {
                 null
                 }
             </div>
-            <div className="d-flex justify-content-end">
-                <Link className="link" to="/sensors">Tout voir</ Link>
+            <div style={{width: '10%'}}>
+                <Link to="/sensors" className='d-flex justify-content-center align-items-center w-100 h-100 card-button btn'>Voir tout</Link>
             </div>
         </div>
         

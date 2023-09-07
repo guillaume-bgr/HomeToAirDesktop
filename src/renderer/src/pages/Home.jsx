@@ -4,8 +4,10 @@ import { useState, useEffect, useContext } from "react"
 import PercentageWidget from "../components/widgets/PercentageWidget"
 import SensorList from "../components/widgets/SensorList"
 import HelpWidget from "../components/widgets/HelpWidget"
+import AqiChart from "../components/widgets/AqiChart"
 import { fetchApi } from "../utils/ApiUtil"
 import { AuthContext } from "../context/AuthContext"
+import loadingIcon from './../assets/img/loading.svg'
 
 export const Data = [
     {
@@ -23,20 +25,53 @@ function Home() {
     const [customer, setCustomer] = useState({})
     const [minHumidity, setMinHumidity] = useState()
     const [maxHumidity, setMaxHumidity] = useState()
+    const [cityIndexes, setCityIndexes] = useState();
+    const [weather, setWeather] = useState();
+    const [date, setDate] = useState(new Date());
+    const [latLng, setLatLng] = useState()
 
     useEffect(() => {
         const fetchAsync = async () => {
             try {
+                if ('geolocation' in navigator) {
+                    navigator.geolocation.getCurrentPosition((position) => {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+                        setLatLng(latitude+','+longitude);
+                    }, (error) => {
+                        return `Error: ${error.message}`;
+                    });
+                } else {
+                    let error = 'Geolocation is not available in this browser.';
+                }
                 let customer = await fetchApi('GET', null, '/customers/'+context.userId, context.token);
                 setCustomer(customer);
                 let minAndMax = await fetchApi('GET', null, '/sensors/least-max-polluant?polluant=humidity', context.token)
                 setMinHumidity(minAndMax.min)
                 setMaxHumidity(minAndMax.max)
             } catch (error) {
+                console.log(error.message);
             }
         }
         fetchAsync();
-    },[])
+    }, [])
+
+    useEffect(() => {
+        const fetchCityAqi = async () => {
+            try {
+                let aqiResp = await fetchApi('GET', null, 'https://api.weatherapi.com/v1/forecast.json?key=ce4df03667f84a2a84c65956230609&q='+latLng+'&aqi=yes', null, true);
+                setWeather(aqiResp)
+                let aqiData = {oxydants: aqiResp.current.air_quality.no2, reducers: aqiResp.current.air_quality.co, pm2_5: aqiResp.current.air_quality.pm2_5, pm10: aqiResp.current.air_quality.pm10}
+                let indexes = await fetchApi('POST', {sensorHistory: JSON.stringify(aqiData)}, '/sensors/aqi');
+                setCityIndexes(indexes)
+            } catch (error) {
+                console.log(error.message);
+            }
+        }
+        if (latLng !== undefined) {
+            fetchCityAqi();
+        }
+    }, [latLng])
 
 	return (
         <div className="container">
@@ -88,6 +123,32 @@ function Home() {
                 <div className="col-12 mb-4">
                     <SensorList />
                 </div>
+                <div className="col-12 col-md-6 col-lg-3 mb-4">
+                    <Card 
+                    title={<div className="d-flex align-items-center"><p>{weather ? weather.location.name + " - " : null}</p><img className="weather-icon" src={weather?.current?.condition?.icon}></img></div>} 
+                    subtitle={"le "+String(date.getDate()).padStart(2, '0') + '/' + String(date.getMonth() + 1).padStart(2, '0') + '/' + date.getFullYear()}
+                    >
+                        <div className="d-flex justify-content-center">
+                            {cityIndexes ? 
+                            <>
+                                <AqiChart AQI={cityIndexes.globalAQI}/>
+                                <div className="ms-2 d-flex flex-column justify-content-between fs-small">
+                                    <p>CO: <span className="fw-bold">277</span></p>
+                                    <p>NO²: <span className="fw-bold">7.7</span></p>
+                                    <p>PM2,5: <span className="fw-bold">15.9</span></p>
+                                    <p>PM10: <span className="fw-bold">17.2</span></p>
+                                </div>
+                                <div className="weather">
+                                    
+                                </div>
+                                
+                            </>
+                            :
+                            <div className="d-flex justify-content-center"><img className="w-50" src={loadingIcon} alt="Logo" /></div>}
+                        </div>
+                    </Card>
+                </div>
+                <div></div>
             </div>
         </div>
 	);
