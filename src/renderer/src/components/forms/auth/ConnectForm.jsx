@@ -34,9 +34,9 @@ export default function ConnectForm() {
             context.setUserId(response.data.customer.id);
             context.setToken(response.data.token);
         }).catch((error)=>{
-            console.log("Api call error");
-            TimerAlert(error.message, 'error')
-            console.log(error.message);
+            if (response?.statusCode == 500) {
+                TimerAlert("Il y a eu un problème durant l'authentification", 'error')
+            }
         });
     }
 	return (
