@@ -3,8 +3,31 @@ import TopBar from "../../components/layout/Topbar"
 import AdviceCard from "../../components/widgets/AdviceCard"
 import Card from "../../components/widgets/Card"
 import placeholder from './../../assets/img/placeholder/woman.jpg'
+import { useContext, useEffect, useState } from "react"
+import { AuthContext } from "../../context/AuthContext"
+import { fetchApi } from "../../utils/ApiUtil"
+
 
 function Profile() {
+    const [user, setUser] = useState()
+    const context = useContext(AuthContext);
+    const removeToken = ()=>{
+        context.setToken('')
+        console.log(context.token);
+    }
+
+    useEffect(() => {
+        const fetchAsync = async () => {
+            try {
+                let response = await fetchApi('GET', null, '/customers/'+ context.userId, context.token);
+                setUser(response)
+                } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchAsync();
+    },[])
+
     return (
         <div className="container">
             <div className="row">
@@ -23,17 +46,19 @@ function Profile() {
                         <div className='row'>
                             <div className='col-6 d-flex'>
                                 <div className='border-right p-2 profile-picture-big'>
-                                    <img className="img-fluid" src={placeholder} />
+                                    <div className='d-flex justify-content-center align-items-center text-white rounded me-0' style={{height: '100%', width: '100%'}}>
+                                        <p className='h1 mb-0'>{user ? user.first_name[0] : null}{user ? user.last_name[0] : null }</p>
+                                    </div>
                                 </div>
                                 <div className="ps-2">
                                     <div className='me-2'>
                                         <div className='d-flex align-items-baseline'>
-                                            <span className='h5 mb-0'>Jenna Doe</span>
-                                            <div className='status ms-2'>
+                                            <span className='h5 mb-0'>{user?.first_name} {user?.last_name}</span>
+                                            {/* <div className='status ms-2'>
                                                 <span className='me-1 badge badge-primary'>PRO</span>
-                                            </div>
+                                            </div> */}
                                         </div>
-                                        <p className='text-muted text-sm'>Inscription le 21/09/22</p>
+                                        <p className='text-muted text-sm'>Inscription le {user?.createdAt ? new Date(user.createdAt).toLocaleString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'}) : '-'}</p>
                                         <div className="description text-muted mt-2 d-flex">
                                             <div className='me-3'>
                                                 <span className="me-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -59,7 +84,7 @@ function Profile() {
                 </div>
                 <div className="col-12">
                     <Card title="Mes informations">
-                        <ProfileEditForm />
+                        <ProfileEditForm data={user}/>
                     </Card>
                 </div>
             </div>
