@@ -29,7 +29,7 @@ function TopBar(props) {
                             if (button.path) {
                                 return <Link key={key} className={button.className ? 'ms-2 btn '+button.className : 'ms-2 btn btn-primary'} to={button.path}>{button.title}</ Link>
                             } else if (button.onPress) {
-                                return <button key={key} className={button.className ? 'ms-2 btn '+button.className : 'ms-2 btn btn-primary'} onPress={button.onPress}>{button.title}</button>
+                                return <button key={key} className={button.className ? 'ms-2 btn '+button.className : 'ms-2 btn btn-primary'} onClick={button.onPress}>{button.title}</button>
                             }
                         }) : null}
                     </div>

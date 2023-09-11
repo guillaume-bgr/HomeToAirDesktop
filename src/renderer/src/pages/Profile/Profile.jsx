@@ -6,14 +6,33 @@ import placeholder from './../../assets/img/placeholder/woman.jpg'
 import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../../context/AuthContext"
 import { fetchApi } from "../../utils/ApiUtil"
+import { TimerAlert, ValidationAlert } from "../../utils/PopupUtils"
+import { redirect } from "react-router-dom"
 
 
 function Profile() {
     const [user, setUser] = useState()
     const context = useContext(AuthContext);
-    const removeToken = ()=>{
-        context.setToken('')
-        console.log(context.token);
+
+    const alertDeleteAccount = () => {
+        ValidationAlert('Êtes-vous sûr de vouloir supprimer votre compte ? (Toutes vos données seront perdues)', deleteAccount)
+    }
+
+    const deleteAccount = () => {
+        const deleteAccountAsync = async () => {
+            try {
+                let response = await fetchApi('DELETE', null, '/customers/'+context.userId, context.token);
+                if (response?.statusCode == 200) {
+                    TimerAlert('Votre compte a bien été supprimé.', 'success');
+                    context.setUserId(null);
+                    context.setRefresh(null);
+                    context.setToken('');
+                }
+            } catch (error) {
+                console.log(error.message)
+            }
+        }
+        deleteAccountAsync();
     }
 
     useEffect(() => {
@@ -38,7 +57,7 @@ function Profile() {
 						{title: 'Accueil', path: '/'},
 						{title: 'Mon profil'},
 					]}
-					buttons={[{title: "Retour à l'accueil", path:'/', className: 'btn-secondary'}]}
+					buttons={[{title: "Retour à l'accueil", path:'/', className: 'btn-secondary'}, {title: "Supprimer mon compte", onPress: () => alertDeleteAccount(), className: 'btn-danger'}]}
                     />
                 </div>
                 <div className="col-12 mb-4">
