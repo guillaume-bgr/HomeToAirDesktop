@@ -23,10 +23,10 @@ function Sensors() {
       console.log(response);
       TimerAlert('Sonde suprimée', 'success')
       setReload(!reload)
-      } catch (error) {
+    } catch (error) {
       console.log(error);
       TimerAlert(error.message, 'error')
-  }
+    }
   }
   
   useEffect(() => {
@@ -40,7 +40,7 @@ function Sensors() {
         }
     }
     fetchAsync();
-},[reload])
+  },[reload])
 
   return (
   parks ?
@@ -94,7 +94,7 @@ function Sensors() {
                         </div>
                       </td>
                       <td>
-                        <Gauge percent={34} />
+                        AQI : 
                       </td>
                       <td>
                         <div className="d-flex justify-content-start flex-column">

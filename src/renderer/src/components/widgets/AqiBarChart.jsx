@@ -16,7 +16,6 @@ useEffect(() => {
         try {
             let response = await fetchApi('GET', null, '/sensors/aqi/average?customerId='+context.userId, context.token);
             setAqiHistory(response);
-            console.log(response);
             } catch (error) {
             console.log(error);
         }

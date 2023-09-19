@@ -109,7 +109,7 @@ function SensorForm(props) {
                         <form method="POST" className="py-2">
                             <input type="text" name="name" defaultValue={formOptions.data.name} className="form-input-solid shadow-none mb-3" placeholder="Nom du capteur" onChange={e => setName(e.target.value)}/>
                             <NiceSelect className="mb-2" options={
-                               parksData
+                                parksData
                             } setSelected = {setSelected}
                         />
                             <button type="button" className="btn btn-primary" onClick={() => sendToApi()}>Ajouter</button>

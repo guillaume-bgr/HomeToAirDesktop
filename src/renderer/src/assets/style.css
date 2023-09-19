@@ -82,6 +82,10 @@ p {
     background-color: var(--home2air-body);
 }
 
+.bg-primary {
+    background-color: var(--home2air-primary);
+}
+
 .w-fit-content {
     width: fit-content;
 }
@@ -241,6 +245,14 @@ h1.page-title {
     border-radius: 8px;
     overflow: hidden;
     margin: 0.5em auto;
+}
+
+.profile-picture div, .profile-picture-big div {
+    background-color: var(--home2air-primary);
+}
+
+.profile-picture div:hover {
+    background-color: #0079ea;
 }
 
 .profile-picture-big {

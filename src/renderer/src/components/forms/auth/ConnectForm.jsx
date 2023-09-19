@@ -5,8 +5,8 @@ import { TimerAlert, ToastAlert } from "../../../utils/PopupUtils";
 import { AuthContext } from "../../../context/AuthContext"; 
 
 export default function ConnectForm() {
-    const [email, setEmail] = useState('cecilia.ruin@gmail.com');
-    const [password, setPassword] = useState('Mot2P@sse');
+    const [email, setEmail] = useState('guillaumebongrand1@gmail.com');
+    const [password, setPassword] = useState('Password2k1!');
     const context = useContext(AuthContext);
 
     const verifyForm = async () => {
@@ -34,7 +34,7 @@ export default function ConnectForm() {
             context.setUserId(response.data.customer.id);
             context.setToken(response.data.token);
         }).catch((error)=>{
-            if (response?.statusCode == 500) {
+            if (response?.statusCode == 500 || response == undefined) {
                 TimerAlert("Il y a eu un problème durant l'authentification", 'error')
             }
         });
